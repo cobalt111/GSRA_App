@@ -10,4 +10,7 @@
     <string name="title_activity_intro">IntroActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="main_button_respondents">Respondents</string>
+    <string name="main_button_assessments">Assessments</string>
 </resources>
