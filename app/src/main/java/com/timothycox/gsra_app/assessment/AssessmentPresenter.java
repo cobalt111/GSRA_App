@@ -1,8 +1,6 @@
 package com.timothycox.gsra_app.assessment;
 
-import com.timothycox.gsra_app.BasePresenter;
-
-class AssessmentPresenter extends BasePresenter {
+class AssessmentPresenter {
 
     private AssessmentView assessmentView;
 

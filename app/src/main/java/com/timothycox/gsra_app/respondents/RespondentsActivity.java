@@ -1,11 +1,11 @@
 package com.timothycox.gsra_app.respondents;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.timothycox.gsra_app.R;
 
-public class RespondentsActivity extends AppCompatActivity implements RespondentsView {
+public class RespondentsActivity extends AppCompatActivity implements RespondentsContract.View {
 
     private RespondentsPresenter presenter;
 
@@ -14,5 +14,9 @@ public class RespondentsActivity extends AppCompatActivity implements Respondent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_respondents);
         presenter = new RespondentsPresenter(this);
+    }
+
+    interface RespondentsScreenEvents {
+        void itemClicked(final int id);
     }
 }

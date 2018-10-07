@@ -1,6 +1,8 @@
 package com.timothycox.gsra_app.main;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,9 +20,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainView {
+        implements NavigationView.OnNavigationItemSelectedListener, MainContract.View {
 
     private MainPresenter presenter;
+    private MainNavigator navigator;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         presenter = new MainPresenter(this);
+        navigator = new MainNavigator(this);
 
         setSupportActionBar(toolbar);
 
@@ -48,6 +52,23 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        presenter.create();
+    }
+
+    @Override
+    public void startLogin() {
+        startActivityForResult(navigator.createAuthInstance(), MainNavigator.SIGN_IN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MainNavigator.SIGN_IN) {
+            presenter.onSignInAttempt();
+            if (resultCode == RESULT_OK) presenter.onSignInSuccess();
+            else presenter.onSignInFailed();
+        }
     }
 
     @Override
@@ -105,13 +126,32 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
+    @Override
     @OnClick(R.id.main_button_respondents)
-    void onClickRespondents() {
-        presenter.onRespondents(getApplicationContext());
+    public void onClickRespondents() {
+        presenter.onRespondents();
     }
 
+    @Override
+    public void navigateToRespondents() {
+        navigator.itemClicked(MainNavigator.RESPONDENTS_ACTIVITY);
+    }
+
+
+    @Override
     @OnClick(R.id.main_button_assessments)
-    void onClickAssessments() {
-        presenter.onAssessments(getApplicationContext());
+    public void onClickAssessments() {
+        presenter.onAssessments();
+    }
+
+
+    @Override
+    public void navigateToAssessments() {
+        navigator.itemClicked(MainNavigator.ASSESSMENTS_ACTIVITY);
+    }
+
+    interface MainScreenEvents {
+        void itemClicked(final int id);
     }
 }

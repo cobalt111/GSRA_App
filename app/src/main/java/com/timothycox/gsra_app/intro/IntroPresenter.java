@@ -1,12 +1,10 @@
 package com.timothycox.gsra_app.intro;
 
-import com.timothycox.gsra_app.BasePresenter;
+class IntroPresenter implements IntroContract.Presenter {
 
-class IntroPresenter extends BasePresenter {
+    private IntroContract.View view;
 
-    private IntroView introView;
-
-    IntroPresenter(IntroView introView) {
-        this.introView = introView;
+    IntroPresenter(IntroContract.View view) {
+        this.view = view;
     }
 }

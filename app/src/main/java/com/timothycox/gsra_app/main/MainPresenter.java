@@ -1,27 +1,40 @@
 package com.timothycox.gsra_app.main;
 
-import android.content.Context;
-import android.content.Intent;
+class MainPresenter implements MainContract.Presenter {
 
-import com.timothycox.gsra_app.BasePresenter;
-import com.timothycox.gsra_app.assessment.AssessmentActivity;
-import com.timothycox.gsra_app.respondents.RespondentsActivity;
+    private MainContract.View view;
 
-class MainPresenter extends BasePresenter {
-
-    private MainView mainView;
-
-    MainPresenter(MainView mainView) {
-        this.mainView = mainView;
+    MainPresenter(MainContract.View view) {
+        this.view = view;
     }
 
-    void onRespondents(Context context) {
-        Intent intent = new Intent(context, RespondentsActivity.class);
-        context.startActivity(intent);
+    @Override
+    public void create() {
+        view.startLogin();
     }
 
-    void onAssessments(Context context) {
-        Intent intent = new Intent(context, AssessmentActivity.class);
-        context.startActivity(intent);
+    @Override
+    public void onRespondents() {
+        view.navigateToRespondents();
+    }
+
+    @Override
+    public void onAssessments() {
+        view.navigateToAssessments();
+    }
+
+    @Override
+    public void onSignInAttempt() {
+
+    }
+
+    @Override
+    public void onSignInSuccess() {
+
+    }
+
+    @Override
+    public void onSignInFailed() {
+
     }
 }

@@ -1,12 +1,10 @@
 package com.timothycox.gsra_app.profile;
 
-import com.timothycox.gsra_app.BasePresenter;
+class ProfilePresenter implements ProfileContract.Presenter {
 
-class ProfilePresenter extends BasePresenter {
+    private ProfileContract.View view;
 
-    private ProfileView profileView;
-
-    ProfilePresenter(ProfileView profileView) {
-        this.profileView = profileView;
+    ProfilePresenter(ProfileContract.View view) {
+        this.view = view;
     }
 }

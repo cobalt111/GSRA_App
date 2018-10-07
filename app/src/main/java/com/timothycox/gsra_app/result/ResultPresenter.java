@@ -1,12 +1,10 @@
 package com.timothycox.gsra_app.result;
 
-import com.timothycox.gsra_app.BasePresenter;
+class ResultPresenter implements ResultContract.Presenter {
 
-class ResultPresenter extends BasePresenter {
+    private ResultContract.View view;
 
-    private ResultView resultView;
-
-    public ResultPresenter(ResultView resultView) {
-        this.resultView = resultView;
+    ResultPresenter(ResultContract.View view) {
+        this.view = view;
     }
 }

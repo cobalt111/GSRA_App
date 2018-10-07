@@ -1,10 +1,10 @@
 package com.timothycox.gsra_app.intro;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -14,7 +14,7 @@ import com.timothycox.gsra_app.R;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class IntroActivity extends AppCompatActivity implements IntroView {
+public class IntroActivity extends AppCompatActivity implements IntroContract.View {
 
     private IntroPresenter presenter;
 
@@ -164,5 +164,9 @@ public class IntroActivity extends AppCompatActivity implements IntroView {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    interface IntroScreenEvents {
+        void itemClicked(final int id);
     }
 }
