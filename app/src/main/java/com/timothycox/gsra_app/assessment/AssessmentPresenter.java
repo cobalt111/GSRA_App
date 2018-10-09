@@ -1,10 +1,10 @@
 package com.timothycox.gsra_app.assessment;
 
-class AssessmentPresenter {
+class AssessmentPresenter implements AssessmentContract.Presenter {
 
-    private AssessmentView assessmentView;
+    private AssessmentContract.View view;
 
-    AssessmentPresenter(AssessmentView assessmentView) {
-        this.assessmentView = assessmentView;
+    AssessmentPresenter(AssessmentContract.View view) {
+        this.view = view;
     }
 }

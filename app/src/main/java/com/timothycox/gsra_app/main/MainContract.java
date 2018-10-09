@@ -1,26 +1,29 @@
 package com.timothycox.gsra_app.main;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 interface MainContract {
     interface View {
         void startLogin();
 
-        void onClickRespondents();
+        void onClickTests();
 
-        void navigateToRespondents();
+        void navigateToTests(Bundle bundle);
 
         void onClickAssessments();
 
-        void navigateToAssessments();
+        void navigateToAssessments(Bundle bundle);
     }
 
     interface Presenter {
         void create();
 
-        void onRespondents();
+        void onTests();
 
         void onAssessments();
 
-        void onSignInAttempt();
+        void onSignInAttempt(Intent intent);
 
         void onSignInSuccess();
 

@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.main_button_respondents)
-    Button respondentsButton;
-    @BindView(R.id.main_button_assessments)
+    @BindView(R.id.main_test_button)
+    Button testsButton;
+    @BindView(R.id.main_previous_assessments_button)
     Button assessmentsButton;
 
     @Override
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == MainNavigator.SIGN_IN) {
-            presenter.onSignInAttempt();
+            presenter.onSignInAttempt(data);
             if (resultCode == RESULT_OK) presenter.onSignInSuccess();
             else presenter.onSignInFailed();
         }
@@ -128,30 +128,30 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    @OnClick(R.id.main_button_respondents)
-    public void onClickRespondents() {
-        presenter.onRespondents();
+    @OnClick(R.id.main_test_button)
+    public void onClickTests() {
+        presenter.onTests();
     }
 
     @Override
-    public void navigateToRespondents() {
-        navigator.itemClicked(MainNavigator.RESPONDENTS_ACTIVITY);
+    public void navigateToTests(Bundle bundle) {
+        navigator.itemClicked(MainNavigator.RESPONDENTS_ACTIVITY, bundle);
     }
 
 
     @Override
-    @OnClick(R.id.main_button_assessments)
+    @OnClick(R.id.main_previous_assessments_button)
     public void onClickAssessments() {
         presenter.onAssessments();
     }
 
 
     @Override
-    public void navigateToAssessments() {
-        navigator.itemClicked(MainNavigator.ASSESSMENTS_ACTIVITY);
+    public void navigateToAssessments(Bundle bundle) {
+        navigator.itemClicked(MainNavigator.ASSESSMENTS_ACTIVITY, bundle);
     }
 
     interface MainScreenEvents {
-        void itemClicked(final int id);
+        void itemClicked(final int id, @Nullable Bundle bundle);
     }
 }
