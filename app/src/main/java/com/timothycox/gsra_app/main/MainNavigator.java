@@ -14,7 +14,6 @@ class MainNavigator implements MainActivity.MainScreenEvents {
 
     static final int SIGN_IN = 123;
 
-    static final int AUTHENTICATION_INSTANCE = 1;
     static final int RESPONDENTS_ACTIVITY = 2;
     static final int ASSESSMENTS_ACTIVITY = 3;
     private Context context;
