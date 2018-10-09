@@ -5,15 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.timothycox.gsra_app.R;
 
-public class ProfileActivity extends AppCompatActivity implements ProfileContract.View {
+public class ExamineeProfileActivity extends AppCompatActivity implements ExamineeProfileContract.View {
 
-    private ProfilePresenter presenter;
+    private ExamineeProfilePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        presenter = new ProfilePresenter(this);
+        presenter = new ExamineeProfilePresenter(this);
     }
 
     interface ProfileClickEvents {

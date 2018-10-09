@@ -7,4 +7,9 @@ class ExamineesPresenter implements ExamineesContract.Presenter {
     ExamineesPresenter(ExamineesContract.View view) {
         this.view = view;
     }
+
+    @Override
+    public void onAddExaminee() {
+        view.navigateToExamineeCreator();
+    }
 }

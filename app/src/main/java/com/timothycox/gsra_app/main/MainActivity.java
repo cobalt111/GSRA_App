@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void navigateToTests(Bundle bundle) {
-        navigator.itemClicked(MainNavigator.RESPONDENTS_ACTIVITY, bundle);
+        navigator.itemClicked(MainNavigator.EXAMINEES_ACTIVITY, bundle);
     }
 
 

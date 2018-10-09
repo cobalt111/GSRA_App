@@ -6,4 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".assessment.AssessmentActivity">
 
+    <TextView
+        android:id="@+id/assessment_question_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="139dp"
+        android:text="Sample Question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/assessment_answer_one_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="137dp"
+        android:text="Answer One"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_question_text" />
+
+    <Button
+        android:id="@+id/assessment_answer_two_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="134dp"
+        android:text="Answer Two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_answer_one_button" />
+
+    <Button
+        android:id="@+id/assessment_answer_three_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="128dp"
+        android:text="Answer Three"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_answer_two_button" />
+
+    <Button
+        android:id="@+id/assessment_answer_four_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="108dp"
+        android:text="Answer Four"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_answer_three_button"
+        app:layout_constraintVertical_bias="0.761" />
 </android.support.constraint.ConstraintLayout>

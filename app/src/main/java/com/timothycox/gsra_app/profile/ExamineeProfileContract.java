@@ -1,6 +1,6 @@
 package com.timothycox.gsra_app.profile;
 
-interface ProfileContract {
+interface ExamineeProfileContract {
     interface View {
 
     }

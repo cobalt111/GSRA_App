@@ -14,7 +14,7 @@ class MainNavigator implements MainActivity.MainScreenEvents {
 
     static final int SIGN_IN = 123;
 
-    static final int RESPONDENTS_ACTIVITY = 2;
+    static final int EXAMINEES_ACTIVITY = 2;
     static final int ASSESSMENTS_ACTIVITY = 3;
     private Context context;
 
@@ -33,7 +33,7 @@ class MainNavigator implements MainActivity.MainScreenEvents {
     @Override
     public void itemClicked(final int id, @Nullable Bundle bundle) {
         switch (id) {
-            case RESPONDENTS_ACTIVITY: {
+            case EXAMINEES_ACTIVITY: {
                 Intent intent = new Intent(context, ExamineesActivity.class);
                 if (bundle != null) intent.putExtra("userBundle", bundle);
                 context.startActivity(intent);

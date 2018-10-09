@@ -2,11 +2,11 @@ package com.timothycox.gsra_app.profile;
 
 import android.content.Context;
 
-class ProfileNavigator implements ProfileActivity.ProfileClickEvents {
+class ExamineeProfileNavigator implements ExamineeProfileActivity.ProfileClickEvents {
 
     private Context context;
 
-    ProfileNavigator(Context context) {
+    ExamineeProfileNavigator(Context context) {
         this.context = context;
     }
 
