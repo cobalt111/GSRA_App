@@ -8,32 +8,69 @@
     tools:context=".main.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="282dp"
+        android:layout_height="205dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/main_test_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/transparent_logo" />
+
     <Button
         android:id="@+id/main_test_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="140dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="323dp"
+        android:layout_width="197dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="288dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/pink_button_shape"
+
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="@string/main_test_button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/main_previous_assessments_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/main_previous_assessments_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="69dp"
-        android:layout_marginEnd="130dp"
-        android:layout_marginStart="131dp"
+
+        android:layout_width="189dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="23dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="69dp"
+        android:background="@drawable/blue_button_shape"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="@string/main_previous_assessments_button"
+
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_test_button" />
+        app:layout_constraintTop_toBottomOf="@+id/main_test_button"
+        app:layout_constraintVertical_bias="0.95"
+
+        />
 </android.support.constraint.ConstraintLayout>

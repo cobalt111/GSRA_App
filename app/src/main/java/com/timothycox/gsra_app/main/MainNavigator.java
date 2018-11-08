@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.firebase.ui.auth.AuthUI;
-import com.timothycox.gsra_app.assessment.AssessmentActivity;
+import com.timothycox.gsra_app.assessment.list.AssessmentListActivity;
 import com.timothycox.gsra_app.examinees.ExamineesActivity;
 import com.timothycox.gsra_app.util.Authentication;
 
@@ -40,7 +40,7 @@ class MainNavigator implements MainActivity.MainScreenEvents {
                 break;
             }
             case ASSESSMENTS_ACTIVITY: {
-                Intent intent = new Intent(context, AssessmentActivity.class);
+                Intent intent = new Intent(context, AssessmentListActivity.class);
                 if (bundle != null) intent.putExtra("userBundle", bundle);
                 context.startActivity(intent);
                 break;

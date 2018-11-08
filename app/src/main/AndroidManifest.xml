@@ -40,7 +40,10 @@
         <activity android:name=".result.ResultActivity" />
         <activity android:name=".examinees.ExamineesActivity" />
         <activity android:name=".post.ExamineeCreatorActivity" />
-        <activity android:name=".assessment.list.AssessmentListActivity"></activity>
+        <activity
+            android:name=".assessment.list.AssessmentListActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

@@ -19,11 +19,10 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
 
         TextView nameText, dateText;
 
-
         public ViewHolder(View view) {
             super(view);
-            nameText = view.findViewById(R.id.listingsNameView);
-            dateText = view.findViewById(R.id.listingsDateView);
+            nameText = view.findViewById(R.id.listingsNameTextView);
+            dateText = view.findViewById(R.id.listingsSubTextView);
         }
     }
 
