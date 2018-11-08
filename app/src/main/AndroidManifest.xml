@@ -39,7 +39,8 @@
         <activity android:name=".profile.ExamineeProfileActivity" />
         <activity android:name=".result.ResultActivity" />
         <activity android:name=".examinees.ExamineesActivity" />
-        <activity android:name=".post.ExamineeCreatorActivity"></activity>
+        <activity android:name=".post.ExamineeCreatorActivity" />
+        <activity android:name=".assessment.list.AssessmentListActivity"></activity>
     </application>
 
 </manifest>

@@ -8,7 +8,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-class Firebase {
+public class Firebase {
 
     private static final Firebase ourInstance = new Firebase();
     private FirebaseDatabase firebaseDatabase;

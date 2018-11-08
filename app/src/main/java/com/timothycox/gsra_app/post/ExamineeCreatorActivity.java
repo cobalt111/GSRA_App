@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
 import com.timothycox.gsra_app.R;
+import com.timothycox.gsra_app.util.Firebase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,13 +37,25 @@ public class ExamineeCreatorActivity extends AppCompatActivity implements Examin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_examinee_creator);
         ButterKnife.bind(this);
+
+
         presenter = new ExamineeCreatorPresenter(this);
         navigator = new ExamineeCreatorNavigator(this);
-
     }
 
     @Override
     public Bundle createExaminee() {
+
+        Firebase firebase = Firebase.getInstance();
+        DatabaseReference databaseReference = firebase.getDatabaseReference()
+                .child("server")
+                .child("users")
+                .child("uid")
+                .child("examinees")
+                .child(nameTextField.getText().toString())
+                .child("age");
+        databaseReference.setValue(Integer.parseInt(ageTextField.getText().toString()));
+
         Bundle bundle = new Bundle();
 
         bundle.putString("name", nameTextField.getText().toString());

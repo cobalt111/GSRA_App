@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
+import com.timothycox.gsra_app.model.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +16,17 @@ public class DatabaseProvider {
 
     private static Firebase firebase = Firebase.getInstance();
     private static DataSnapshot currentDatabase = null;
+    private static List<Question> questionList;
 
     public static void submit() {
 
     }
 
-    public static List<String> getData() {
+    public static List<Question> getAssessment(String category) {
         Query query = firebase.getDatabaseReference()
                 .child("server")
-                .child("animals")
-                .orderByChild("date");
+                .child("assessments")
+                .child(category);
         firebase.access(false, query, new Firebase.OnGetDataListener() {
             @Override
             public void onSuccessfulAdd(DataSnapshot dataSnapshot) {
@@ -33,7 +35,7 @@ public class DatabaseProvider {
 
             @Override
             public void onSuccessfulChange(DataSnapshot dataSnapshot) {
-                currentDatabase = dataSnapshot;
+                questionList = parseDataSnapshotAsQuestionList(dataSnapshot);
             }
 
             @Override
@@ -51,14 +53,14 @@ public class DatabaseProvider {
                 Log.d(TAG, databaseError.getDetails());
             }
         });
-        return parseDataSnapshotAsList(currentDatabase);
+        return questionList;
     }
 
-    private static List<String> parseDataSnapshotAsList(DataSnapshot dataSnapshot) {
-        List<String> list = new ArrayList<>();
+    private static List<Question> parseDataSnapshotAsQuestionList(DataSnapshot dataSnapshot) {
+        List<Question> list = new ArrayList<>();
         Iterable<DataSnapshot> snapshotIterable = dataSnapshot.getChildren();
-        for (DataSnapshot stringEntry : snapshotIterable) {
-            list.add(stringEntry.getValue(String.class));
+        for (DataSnapshot questionEntry : snapshotIterable) {
+            list.add(questionEntry.getValue(Question.class));
         }
         return list;
     }

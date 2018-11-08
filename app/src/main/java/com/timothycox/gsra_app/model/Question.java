@@ -1,28 +1,37 @@
 package com.timothycox.gsra_app.model;
 
-public class Question {
+import java.io.Serializable;
 
-    private String question;
-    private int answer;
+public class Question implements Serializable {
 
-    public Question(String question, int answer) {
-        this.question = question;
-        this.answer = answer;
+    private long id;
+    private String importance;
+    private String questionText;
+
+    public Question() {
     }
 
-    public String getQuestion() {
-        return question;
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
-    public int getAnswer() {
-        return answer;
+    public long getId() {
+        return id;
     }
 
-    public void setAnswer(int answer) {
-        this.answer = answer;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImportance() {
+        return importance;
+    }
+
+    public void setImportance(String importance) {
+        this.importance = importance;
     }
 }

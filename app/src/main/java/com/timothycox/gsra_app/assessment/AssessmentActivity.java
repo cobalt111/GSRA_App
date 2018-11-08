@@ -10,8 +10,6 @@ public class AssessmentActivity extends AppCompatActivity implements AssessmentC
     private AssessmentPresenter presenter;
     private AssessmentNavigator navigator;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

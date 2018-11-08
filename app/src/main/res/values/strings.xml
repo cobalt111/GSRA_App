@@ -27,4 +27,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">156610595294599</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb156610595294599</string>
+    <!-- Twitter consumer key and secret -->
+    <string name="twitter_consumer_key" translatable="false">AiwJ2uuwQx0LmOjJ2RKGaYgYb</string>
+    <string name="twitter_consumer_secret" translatable="false">5xFVFZUxYurv3GcBXTvJ83vuEUWmbQ2zi9H7y7lyfBh8pWgODU</string>
 </resources>
