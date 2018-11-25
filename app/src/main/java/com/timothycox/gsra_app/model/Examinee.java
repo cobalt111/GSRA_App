@@ -8,10 +8,10 @@ public class Examinee {
     private int age;
     private List<Assessment> assessments;
 
-    public Examinee(String name, int age, List<Assessment> assessments) {
+    public Examinee(String name, int age/*, List<Assessment> assessments */) {
         this.name = name;
         this.age = age;
-        this.assessments = assessments;
+//        this.assessments = assessments;
     }
 
     public String getName() {

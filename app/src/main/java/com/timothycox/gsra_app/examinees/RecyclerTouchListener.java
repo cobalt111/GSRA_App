@@ -1,4 +1,4 @@
-package com.timothycox.gsra_app.assessment.list;
+package com.timothycox.gsra_app.examinees;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

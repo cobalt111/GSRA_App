@@ -1,17 +1,28 @@
 package com.timothycox.gsra_app.examinees;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.timothycox.gsra_app.R;
+import com.timothycox.gsra_app.model.Examinee;
 import com.timothycox.gsra_app.model.Question;
+import com.timothycox.gsra_app.profile.ExamineeProfileActivity;
 import com.timothycox.gsra_app.util.Firebase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,17 +32,13 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
 
     private ExamineesPresenter presenter;
     private ExamineesNavigator navigator;
-    Question question;
+    private ExamineeListingsAdapter adapter;
+    private LinearLayoutManager layoutManager;
 
-
-    @BindView(R.id.examinee_name_text)
-    TextView nameText;
-    @BindView(R.id.examinee_age_text)
-    TextView ageText;
-    @BindView(R.id.examinee_result_text)
-    TextView resultText;
     @BindView(R.id.examinees_add_button)
     Button addExamineeButton;
+    @BindView(R.id.examineesRecyclerView)
+    RecyclerView examineesRecyclerView;
 
     @Override
     @OnClick(R.id.examinees_add_button)
@@ -45,34 +52,43 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
         setContentView(R.layout.activity_examinees);
         ButterKnife.bind(this);
 
-        Firebase firebase = Firebase.getInstance();
+        examineesRecyclerView.setAdapter(adapter);
 
-        Query query = firebase.getDatabaseReference()
+        Firebase firebase = Firebase.getInstance();
+        DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
-                .child("assessments")
-                .child("12-month");
-        firebase.access(false, query, new Firebase.OnGetDataListener() {
+                .child("users")
+                .child("uid");
+
+        firebase.access(true, databaseReference, new Firebase.OnGetDataListener() {
             @Override
             public void onSuccessfulAdd(DataSnapshot dataSnapshot) {
-                question = dataSnapshot.getValue(Question.class);
-                nameText.setText(String.valueOf(question.getId()));
-                ageText.setText(String.valueOf(question.getImportance()));
-                resultText.setText(String.valueOf(question.getQuestionText()));
+                List<Examinee> examineeList = new ArrayList<>();
+                Examinee examinee;
+
+                for (DataSnapshot currentExaminee : dataSnapshot.getChildren()) {
+                    examinee = new Examinee(currentExaminee.child("name").getValue(String.class),
+                             Math.toIntExact(currentExaminee.child("age").getValue(Long.class)));
+                    examineeList.add(examinee);
+                }
+
+                adapter = new ExamineeListingsAdapter(examineeList);
+                examineesRecyclerView.setAdapter(adapter);
             }
 
             @Override
             public void onSuccessfulChange(DataSnapshot dataSnapshot) {
-                question = dataSnapshot.getValue(Question.class);
+
             }
 
             @Override
             public void onSuccessfulRemoval(DataSnapshot dataSnapshot) {
-                question = dataSnapshot.getValue(Question.class);
+
             }
 
             @Override
             public void onSuccessfulMove(DataSnapshot dataSnapshot) {
-                question = dataSnapshot.getValue(Question.class);
+
             }
 
             @Override
@@ -80,6 +96,61 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
 
             }
         });
+
+        examineesRecyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        examineesRecyclerView.setLayoutManager(layoutManager);
+        examineesRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        examineesRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),
+                examineesRecyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent openExamineeProfileIntent = new Intent(getApplicationContext(), ExamineeProfileActivity.class);
+                startActivity(openExamineeProfileIntent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+//
+//        Firebase firebase = Firebase.getInstance();
+//
+//        Query query = firebase.getDatabaseReference()
+//                .child("server")
+//                .child("assessments")
+//                .child("12-month");
+//        firebase.access(false, query, new Firebase.OnGetDataListener() {
+//            @Override
+//            public void onSuccessfulAdd(DataSnapshot dataSnapshot) {
+//                question = dataSnapshot.getValue(Question.class);
+//                nameText.setText(String.valueOf(question.getId()));
+//                ageText.setText(String.valueOf(question.getImportance()));
+//                resultText.setText(String.valueOf(question.getQuestionText()));
+//            }
+//
+//            @Override
+//            public void onSuccessfulChange(DataSnapshot dataSnapshot) {
+//                question = dataSnapshot.getValue(Question.class);
+//            }
+//
+//            @Override
+//            public void onSuccessfulRemoval(DataSnapshot dataSnapshot) {
+//                question = dataSnapshot.getValue(Question.class);
+//            }
+//
+//            @Override
+//            public void onSuccessfulMove(DataSnapshot dataSnapshot) {
+//                question = dataSnapshot.getValue(Question.class);
+//            }
+//
+//            @Override
+//            public void onFailure(DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
         presenter = new ExamineesPresenter(this);
