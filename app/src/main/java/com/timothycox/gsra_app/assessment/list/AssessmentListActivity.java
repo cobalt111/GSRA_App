@@ -108,7 +108,7 @@ public class AssessmentListActivity extends AppCompatActivity implements Assessm
 
 //        firebase.access(true, databaseReference, new Firebase.OnGetDataListener() {
 //            @Override
-//            public void onSuccessfulAdd(DataSnapshot dataSnapshot) {
+//            public void onSuccess(DataSnapshot dataSnapshot) {
 //                String assessmentLevel = "", examinee = "", timestamp = "";
 //                List<Assessment> assessmentList = new ArrayList<>();
 //                List<Question> questionList = new ArrayList<>();

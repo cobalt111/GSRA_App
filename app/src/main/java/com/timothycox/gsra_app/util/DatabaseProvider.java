@@ -29,23 +29,8 @@ public class DatabaseProvider {
                 .child(category);
         firebase.access(false, query, new Firebase.OnGetDataListener() {
             @Override
-            public void onSuccessfulAdd(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onSuccessfulChange(DataSnapshot dataSnapshot) {
+            public void onSuccess(DataSnapshot dataSnapshot) {
                 questionList = parseDataSnapshotAsQuestionList(dataSnapshot);
-            }
-
-            @Override
-            public void onSuccessfulRemoval(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onSuccessfulMove(DataSnapshot dataSnapshot) {
-
             }
 
             @Override

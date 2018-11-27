@@ -7,10 +7,12 @@ public class Examinee {
     private String name;
     private int age;
     private List<Assessment> assessments;
+    private String gender;
 
-    public Examinee(String name, int age/*, List<Assessment> assessments */) {
+    public Examinee(String name, int age, String gender/*, List<Assessment> assessments */) {
         this.name = name;
         this.age = age;
+        this.gender = gender;
 //        this.assessments = assessments;
     }
 
@@ -28,6 +30,14 @@ public class Examinee {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public List<Assessment> getAssessments() {

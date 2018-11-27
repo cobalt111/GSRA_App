@@ -21,7 +21,7 @@ class ExamineesNavigator implements ExamineesActivity.ExamineesScreenEvents {
         switch (id) {
             case EXAMINEE_CREATOR_ACTIVITY: {
                 Intent intent = new Intent(context, ExamineeCreatorActivity.class);
-                if (bundle != null) intent.putExtra("bundle", bundle);
+                if (bundle != null) intent.putExtra("userBundle", bundle);
                 context.startActivity(intent);
                 break;
             }

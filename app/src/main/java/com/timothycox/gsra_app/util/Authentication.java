@@ -21,16 +21,15 @@ public class Authentication {
         return Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.FacebookBuilder().build(),
-                new AuthUI.IdpConfig.GoogleBuilder().build(),
-                new AuthUI.IdpConfig.TwitterBuilder().build()
-//                new AuthUI.IdpConfig.PhoneBuilder().build()
+                new AuthUI.IdpConfig.GoogleBuilder().build()
         );
     }
 
     public static User getUser() {
-
         // todo check for null properly
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         return new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getUid());
     }
+
+
 }

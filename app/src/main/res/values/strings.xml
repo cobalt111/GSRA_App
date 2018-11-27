@@ -35,4 +35,27 @@
     <!-- Twitter consumer key and secret -->
     <string name="twitter_consumer_key" translatable="false">AiwJ2uuwQx0LmOjJ2RKGaYgYb</string>
     <string name="twitter_consumer_secret" translatable="false">5xFVFZUxYurv3GcBXTvJ83vuEUWmbQ2zi9H7y7lyfBh8pWgODU</string>
+
+
+    <!-- Result Activity -->
+
+    <string name="resultNameDefault">Name</string>
+    <string name="resultAgeLabel">Age:</string>
+    <string name="resultDateLabel">Date taken:</string>
+    <string name="resultAgeDefault">Age</string>
+    <string name="resultDateDefault">Date</string>
+    <string name="resultScoreLabel">Score:</string>
+    <string name="resultScoreDefault">Score</string>
+    <string name="resultExplanationDefault">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis quis sem et venenatis. Etiam suscipit elit odio, vel vestibulum sem dapibus vitae. Morbi vestibulum metus eu risus convallis, nec sollicitudin libero volutpat. Nunc condimentum velit nibh, a pulvinar ipsum consequat vel. Praesent nec scelerisque ante. Quisque ullamcorper accumsan nibh.</string>
+    <string name="resultNewTestButton">Take a new test</string>
+    <string name="profilePreviousAsssessmentsLabel">Previous assessments taken:</string>
+    <string name="examineeCreatorGenderLabel">Select gender:</string>
+
+    <string-array name="genderChoices">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+        <item>Prefer not to say</item>
+    </string-array>
+
 </resources>

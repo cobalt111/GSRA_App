@@ -1,4 +1,4 @@
-package com.timothycox.gsra_app.examinees;
+package com.timothycox.gsra_app.profile;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import com.timothycox.gsra_app.model.Examinee;
 
 import java.util.List;
 
-class ExamineeListingsAdapter extends RecyclerView.Adapter<ExamineeListingsAdapter.ViewHolder> {
+class ExamineeProfileRecyclerViewAdapter extends RecyclerView.Adapter<ExamineeProfileRecyclerViewAdapter.ViewHolder> {
 
     public List<Examinee> examineeList;
 
@@ -27,14 +27,14 @@ class ExamineeListingsAdapter extends RecyclerView.Adapter<ExamineeListingsAdapt
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ExamineeListingsAdapter(List<Examinee> dataset) {
+    public ExamineeProfileRecyclerViewAdapter(List<Examinee> dataset) {
         examineeList = dataset;
     }
 
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ExamineeListingsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ExamineeProfileRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_assessment_listing_row, parent, false);
@@ -50,7 +50,7 @@ class ExamineeListingsAdapter extends RecyclerView.Adapter<ExamineeListingsAdapt
 
         Examinee examinee = examineeList.get(position);
         holder.nameText.setText(examinee.getName());
-        holder.ageText.setText(examinee.getAge());
+        holder.ageText.setText(String.valueOf(examinee.getAge()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

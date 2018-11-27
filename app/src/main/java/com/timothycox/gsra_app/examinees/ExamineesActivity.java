@@ -9,15 +9,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
 import com.timothycox.gsra_app.R;
 import com.timothycox.gsra_app.model.Examinee;
-import com.timothycox.gsra_app.model.Question;
+import com.timothycox.gsra_app.model.User;
 import com.timothycox.gsra_app.profile.ExamineeProfileActivity;
 import com.timothycox.gsra_app.util.Firebase;
 
@@ -32,13 +30,11 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
 
     private ExamineesPresenter presenter;
     private ExamineesNavigator navigator;
-    private ExamineeListingsAdapter adapter;
+    private ExamineesRecyclerViewAdapter adapter;
     private LinearLayoutManager layoutManager;
 
-    @BindView(R.id.examinees_add_button)
-    Button addExamineeButton;
-    @BindView(R.id.examineesRecyclerView)
-    RecyclerView examineesRecyclerView;
+    @BindView(R.id.examinees_add_button) Button addExamineeButton;
+    @BindView(R.id.examineesRecyclerView) RecyclerView examineesRecyclerView;
 
     @Override
     @OnClick(R.id.examinees_add_button)
@@ -52,43 +48,31 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
         setContentView(R.layout.activity_examinees);
         ButterKnife.bind(this);
 
-        examineesRecyclerView.setAdapter(adapter);
+        // todo implement this in presenter instead
+        User user = (User) getIntent().getBundleExtra("userBundle").getSerializable("user");
 
         Firebase firebase = Firebase.getInstance();
         DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
                 .child("users")
-                .child("uid");
+                .child(user.getUid())
+                .child("examinees");
 
         firebase.access(true, databaseReference, new Firebase.OnGetDataListener() {
             @Override
-            public void onSuccessfulAdd(DataSnapshot dataSnapshot) {
+            public void onSuccess(DataSnapshot dataSnapshot) {
                 List<Examinee> examineeList = new ArrayList<>();
                 Examinee examinee;
 
                 for (DataSnapshot currentExaminee : dataSnapshot.getChildren()) {
                     examinee = new Examinee(currentExaminee.child("name").getValue(String.class),
-                             Math.toIntExact(currentExaminee.child("age").getValue(Long.class)));
+                            currentExaminee.child("age").getValue(Integer.class),
+                            currentExaminee.child("gender").getValue(String.class));
                     examineeList.add(examinee);
                 }
 
-                adapter = new ExamineeListingsAdapter(examineeList);
+                adapter = new ExamineesRecyclerViewAdapter(examineeList);
                 examineesRecyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onSuccessfulChange(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onSuccessfulRemoval(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onSuccessfulMove(DataSnapshot dataSnapshot) {
-
             }
 
             @Override
@@ -107,6 +91,7 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
             @Override
             public void onClick(View view, int position) {
                 Intent openExamineeProfileIntent = new Intent(getApplicationContext(), ExamineeProfileActivity.class);
+                openExamineeProfileIntent.putExtra("userBundle", getIntent().getBundleExtra("userBundle"));
                 startActivity(openExamineeProfileIntent);
             }
 
@@ -115,43 +100,6 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
 
             }
         }));
-//
-//        Firebase firebase = Firebase.getInstance();
-//
-//        Query query = firebase.getDatabaseReference()
-//                .child("server")
-//                .child("assessments")
-//                .child("12-month");
-//        firebase.access(false, query, new Firebase.OnGetDataListener() {
-//            @Override
-//            public void onSuccessfulAdd(DataSnapshot dataSnapshot) {
-//                question = dataSnapshot.getValue(Question.class);
-//                nameText.setText(String.valueOf(question.getId()));
-//                ageText.setText(String.valueOf(question.getImportance()));
-//                resultText.setText(String.valueOf(question.getQuestionText()));
-//            }
-//
-//            @Override
-//            public void onSuccessfulChange(DataSnapshot dataSnapshot) {
-//                question = dataSnapshot.getValue(Question.class);
-//            }
-//
-//            @Override
-//            public void onSuccessfulRemoval(DataSnapshot dataSnapshot) {
-//                question = dataSnapshot.getValue(Question.class);
-//            }
-//
-//            @Override
-//            public void onSuccessfulMove(DataSnapshot dataSnapshot) {
-//                question = dataSnapshot.getValue(Question.class);
-//            }
-//
-//            @Override
-//            public void onFailure(DatabaseError databaseError) {
-//
-//            }
-//        });
-
 
         presenter = new ExamineesPresenter(this);
         navigator = new ExamineesNavigator(this);
@@ -159,7 +107,7 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
 
     @Override
     public void navigateToExamineeCreator() {
-        navigator.itemClicked(ExamineesNavigator.EXAMINEE_CREATOR_ACTIVITY, null);
+        navigator.itemClicked(ExamineesNavigator.EXAMINEE_CREATOR_ACTIVITY, getIntent().getBundleExtra("userBundle"));
     }
 
     interface ExamineesScreenEvents {

@@ -36,14 +36,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".profile.ExamineeProfileActivity" />
-        <activity android:name=".result.ResultActivity" />
-        <activity android:name=".examinees.ExamineesActivity" />
-        <activity android:name=".post.ExamineeCreatorActivity" />
+        <activity
+            android:name=".profile.ExamineeProfileActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".result.ResultActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".examinees.ExamineesActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".post.ExamineeCreatorActivity"
+            android:exported="true"/>
         <activity
             android:name=".assessment.list.AssessmentListActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"/>
     </application>
 
 </manifest>

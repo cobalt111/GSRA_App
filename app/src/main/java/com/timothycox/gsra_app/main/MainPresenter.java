@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.auth.AdditionalUserInfo;
 import com.timothycox.gsra_app.model.User;
 import com.timothycox.gsra_app.util.Authentication;
 

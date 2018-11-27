@@ -25,16 +25,11 @@ public class MainActivity extends AppCompatActivity
     private MainPresenter presenter;
     private MainNavigator navigator;
 
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
-    @BindView(R.id.nav_view)
-    NavigationView navigationView;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.main_test_button)
-    Button testsButton;
-    @BindView(R.id.main_previous_assessments_button)
-    Button assessmentsButton;
+    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
+    @BindView(R.id.nav_view) NavigationView navigationView;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.main_test_button) Button testsButton;
+    @BindView(R.id.main_previous_assessments_button) Button assessmentsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +40,18 @@ public class MainActivity extends AppCompatActivity
         navigator = new MainNavigator(this);
 
         setSupportActionBar(toolbar);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-
-
         presenter.create();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -149,7 +146,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void navigateToAssessments(Bundle bundle) {
-        navigator.itemClicked(MainNavigator.ASSESSMENTS_ACTIVITY, bundle);
+        navigator.itemClicked(MainNavigator.ASSESSMENT_LIST_ACTIVITY, bundle);
     }
 
     interface MainScreenEvents {

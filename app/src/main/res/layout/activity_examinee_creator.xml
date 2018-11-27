@@ -24,22 +24,32 @@
         android:id="@+id/examinee_creator_age_textfield"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="84dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="textPersonName|number"
         android:hint="Age (months)"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="textPersonName|number"
+        app:layout_constraintEnd_toEndOf="@+id/examinee_creator_name_textfield"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/examinee_creator_name_textfield"
         app:layout_constraintTop_toBottomOf="@+id/examinee_creator_name_textfield" />
+
+    <Spinner
+        android:id="@+id/examineeCreatorGenderSpinner"
+        android:layout_width="212dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="8dp"
+        android:entries="@array/genderChoices"
+        app:layout_constraintEnd_toEndOf="@+id/examinee_creator_name_textfield"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/examinee_creator_name_textfield"
+        app:layout_constraintTop_toBottomOf="@+id/examineeCreatorGenderLabel" />
 
     <Button
         android:id="@+id/examinee_creator_add_button"
         android:layout_width="263dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="131dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="360dp"
         android:layout_marginEnd="130dp"
         android:layout_marginBottom="76dp"
         android:background="@drawable/blue_button_shape"
@@ -54,5 +64,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/examineeCreatorGenderSpinner" />
+
+    <TextView
+        android:id="@+id/examineeCreatorGenderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/examineeCreatorGenderLabel"
+        app:layout_constraintEnd_toEndOf="@+id/examinee_creator_name_textfield"
+        app:layout_constraintStart_toStartOf="@+id/examinee_creator_name_textfield"
         app:layout_constraintTop_toBottomOf="@+id/examinee_creator_age_textfield" />
 </android.support.constraint.ConstraintLayout>
