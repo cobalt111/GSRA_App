@@ -5,9 +5,13 @@ interface ExamineesContract {
         void onClickAddExaminee();
 
         void navigateToExamineeCreator();
+
+        void setRecyclerViewAdapter(ExamineesRecyclerViewAdapter adapter);
     }
 
     interface Presenter {
         void onAddExaminee();
+
+        void create();
     }
 }

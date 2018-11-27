@@ -11,7 +11,7 @@ import com.timothycox.gsra_app.model.Assessment;
 
 import java.util.List;
 
-class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHolder> {
+class AssessmentRecyclerViewAdapter extends RecyclerView.Adapter<AssessmentRecyclerViewAdapter.ViewHolder> {
 
     public List<Assessment> assessmentList;
 
@@ -27,14 +27,14 @@ class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListingsAdapter(List<Assessment> dataset) {
+    public AssessmentRecyclerViewAdapter(List<Assessment> dataset) {
         assessmentList = dataset;
     }
 
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ListingsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AssessmentRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_assessment_listing_row, parent, false);

@@ -6,7 +6,7 @@ interface ExamineeCreatorContract {
     interface View {
         void onClickAddExaminee();
 
-        Bundle createExaminee();
+        Bundle getExamineeData();
 
         void navigateToAssessments(Bundle bundle);
     }

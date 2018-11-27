@@ -46,10 +46,11 @@
     <string name="resultDateDefault">Date</string>
     <string name="resultScoreLabel">Score:</string>
     <string name="resultScoreDefault">Score</string>
-    <string name="resultExplanationDefault">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis quis sem et venenatis. Etiam suscipit elit odio, vel vestibulum sem dapibus vitae. Morbi vestibulum metus eu risus convallis, nec sollicitudin libero volutpat. Nunc condimentum velit nibh, a pulvinar ipsum consequat vel. Praesent nec scelerisque ante. Quisque ullamcorper accumsan nibh.</string>
+    <string name="resultExplanationDefault">The user can evaluate themself or conduct a child evaluation. This tool should not be used for diagnosing the condition, but can be used to gauge the necessity of further evaluation by a professional. There are 50 self-evaluation questions and 34 child evaluation questions, and the test generates a percentage of possibility. The questions are based on other questionnaires, but are not standard criteria used by any medical standards establishments.</string>
     <string name="resultNewTestButton">Take a new test</string>
     <string name="profilePreviousAsssessmentsLabel">Previous assessments taken:</string>
     <string name="examineeCreatorGenderLabel">Select gender:</string>
+    <string name="examineeRowBoyAgeLabel">Age:</string>
 
     <string-array name="genderChoices">
         <item>Male</item>
