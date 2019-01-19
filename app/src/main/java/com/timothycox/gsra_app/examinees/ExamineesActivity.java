@@ -54,6 +54,7 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
             public void onClick(View view, int position) {
                 Intent openExamineeProfileIntent = new Intent(getApplicationContext(), ExamineeProfileActivity.class);
                 openExamineeProfileIntent.putExtra("userBundle", getIntent().getBundleExtra("userBundle"));
+                openExamineeProfileIntent.putExtra("selectedExaminee", adapter.examineeList.get(position));
                 startActivity(openExamineeProfileIntent);
             }
 
@@ -66,6 +67,7 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
 
     @Override
     public void setRecyclerViewAdapter(ExamineesRecyclerViewAdapter adapter) {
+        this.adapter = adapter;
         examineesRecyclerView.setAdapter(adapter);
     }
 

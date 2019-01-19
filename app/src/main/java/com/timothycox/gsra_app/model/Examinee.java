@@ -1,8 +1,9 @@
 package com.timothycox.gsra_app.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Examinee {
+public class Examinee implements Serializable {
 
     private String name;
     private int age;

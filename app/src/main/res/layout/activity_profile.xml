@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/profileNameText"
-            android:layout_width="190dp"
+            android:layout_width="174dp"
             android:layout_height="49dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="16dp"
@@ -88,13 +88,15 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/profileRecyclerView"
         android:layout_width="395dp"
-        android:layout_height="464dp"
+        android:layout_height="372dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePreviousAssessmentsLabel" />
 
     <TextView
         android:id="@+id/profilePreviousAssessmentsLabel"
@@ -107,6 +109,7 @@
         android:text="@string/profilePreviousAsssessmentsLabel"
         app:layout_constraintBottom_toTopOf="@+id/profileRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 </android.support.constraint.ConstraintLayout>

@@ -51,6 +51,7 @@
     <string name="profilePreviousAsssessmentsLabel">Previous assessments taken:</string>
     <string name="examineeCreatorGenderLabel">Select gender:</string>
     <string name="examineeRowBoyAgeLabel">Age:</string>
+    <string name="resultLearnMoreButtonText">Learn More</string>
 
     <string-array name="genderChoices">
         <item>Male</item>
