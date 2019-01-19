@@ -17,6 +17,40 @@ public class Examinee implements Serializable {
 //        this.assessments = assessments;
     }
 
+    public String getAgeAsString() {
+        int years = age / 12;
+        int months = age % 12;
+        String monthTerm = "", yearsTerm = "";
+
+        if (months == 1)
+            monthTerm = "month";
+        else if (months > 1)
+            monthTerm = "months";
+
+        if (years == 1)
+            yearsTerm = "year";
+        else if (months > 1)
+            yearsTerm = "years";
+
+        if (years == 0)
+            return new StringBuilder(String.valueOf(age))
+                    .append(" ")
+                    .append(monthTerm)
+                    .toString();
+        else {
+            StringBuilder builder = new StringBuilder(String.valueOf(years))
+                .append(" ")
+                .append(yearsTerm);
+            if (months > 0) {
+                builder.append(", ")
+                        .append(months)
+                        .append(" ")
+                        .append(monthTerm);
+            }
+            return builder.toString();
+        }
+    }
+
     public String getName() {
         return name;
     }

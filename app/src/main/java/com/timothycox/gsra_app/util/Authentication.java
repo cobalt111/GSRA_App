@@ -31,5 +31,10 @@ public class Authentication {
         return new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getUid());
     }
 
+//    public void setAuthToPersist() {
+//        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+//        firebaseAuth.
+//    }
+
 
 }

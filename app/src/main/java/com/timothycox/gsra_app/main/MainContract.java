@@ -1,11 +1,10 @@
 package com.timothycox.gsra_app.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 interface MainContract {
     interface View {
-        void startLogin();
+//        void startLogin();
 
         void onClickTests();
 
@@ -23,10 +22,10 @@ interface MainContract {
 
         void onAssessments();
 
-        void onSignInAttempt(Intent intent);
+//        void onSignInAttempt(Intent intent);
 
-        void onSignInSuccess();
+//        void onSignInSuccess();
 
-        void onSignInFailed();
+//        void onSignInFailed();
     }
 }

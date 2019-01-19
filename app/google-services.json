@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "404192525210-d5voittltt98uu3fepg0jpcs5nncvtua.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.timothycox.gsra_app",
+            "certificate_hash": "9e85fa79ee496851220ca394b2e80bd9a782023f"
+          }
+        },
+        {
+          "client_id": "404192525210-msbgn4pgu648l4ehvjv2o5ioj8gubrc5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.timothycox.gsra_app",
+            "certificate_hash": "fb073d4ccc06e9729973c602c6db536b22df3277"
+          }
+        },
+        {
           "client_id": "404192525210-4q6ilik2fho1vsd903l51r8frtsgufab.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -24,6 +24,7 @@ public class ExamineeProfileActivity extends AppCompatActivity implements Examin
     @BindView(R.id.profilePreviousAssessmentsLabel) TextView profilePreviousAssessmentLabel;
     @BindView(R.id.profileBoyImage) ImageView profileBoyImage;
     @BindView(R.id.profileGirlImage) ImageView profileGirlImage;
+    @BindView(R.id.profileNeutralImage) ImageView profileNeutralImage;
     @BindView(R.id.profileRecyclerView) RecyclerView profileRecyclerView;
 
     @Override
@@ -40,10 +41,16 @@ public class ExamineeProfileActivity extends AppCompatActivity implements Examin
     @Override
     public void populateUIWithData(Examinee examinee) {
         profileNameText.setText(examinee.getName());
-        profileAgeText.setText(String.valueOf(examinee.getAge()));
+        profileAgeText.setText(String.valueOf(examinee.getAgeAsString()));
 
-        if (examinee.getGender().equals("Male")) profileGirlImage.setVisibility(View.GONE);
-        else if (examinee.getGender().equals("Female")) profileBoyImage.setVisibility(View.GONE);
+        if (examinee.getGender().equals("Male")) {
+            profileGirlImage.setVisibility(View.GONE);
+            profileNeutralImage.setVisibility(View.GONE);
+        }
+        else if (examinee.getGender().equals("Female")) {
+            profileBoyImage.setVisibility(View.GONE);
+            profileNeutralImage.setVisibility(View.GONE);
+        }
         else {
             profileGirlImage.setVisibility(View.GONE);
             profileBoyImage.setVisibility(View.GONE);

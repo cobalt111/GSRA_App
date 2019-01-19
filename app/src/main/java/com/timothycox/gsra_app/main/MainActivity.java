@@ -1,6 +1,5 @@
 package com.timothycox.gsra_app.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -13,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.firebase.FirebaseApp;
 import com.timothycox.gsra_app.R;
 
 import butterknife.BindView;
@@ -36,14 +38,26 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        presenter = new MainPresenter(this);
+        FirebaseApp.initializeApp(this);
+        presenter = new MainPresenter(this, getIntent().getBundleExtra("userBundle"));
         navigator = new MainNavigator(this);
+
 
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(R.id.main_test_button,this))
+                .setContentTitle("ShowcaseView")
+                .setContentText("This is highlighting the Home button")
+                .setStyle(R.style.CustomShowcaseTheme4)
+                .hideOnTouchOutside()
+                .withHoloShowcase()
+                .singleShot(1)
+                .build();
 
         navigationView.setNavigationItemSelectedListener(this);
         presenter.create();
@@ -54,20 +68,20 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
     }
 
-    @Override
-    public void startLogin() {
-        startActivityForResult(navigator.createAuthInstance(), MainNavigator.SIGN_IN);
-    }
+//    @Override
+//    public void startLogin() {
+//        startActivityForResult(navigator.createAuthInstance(), MainNavigator.SIGN_IN);
+//    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == MainNavigator.SIGN_IN) {
-            presenter.onSignInAttempt(data);
-            if (resultCode == RESULT_OK) presenter.onSignInSuccess();
-            else presenter.onSignInFailed();
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == MainNavigator.SIGN_IN) {
+//            presenter.onSignInAttempt(data);
+//            if (resultCode == RESULT_OK) presenter.onSignInSuccess();
+//            else presenter.onSignInFailed();
+//        }
+//    }
 
     @Override
     public void onBackPressed() {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.timothycox.gsra_app">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -15,42 +14,44 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".login.LoginActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".assessment.AssessmentActivity" />
         <activity
-            android:name=".intro.IntroActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_intro"
-            android:theme="@style/FullscreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".profile.ExamineeProfileActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="@string/title_examinee_profile" />
         <activity
             android:name=".result.ResultActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="@string/title_results" />
         <activity
             android:name=".examinees.ExamineesActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="@string/title_examinees" />
         <activity
             android:name=".post.ExamineeCreatorActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="@string/title_examinee_creator" />
         <activity
             android:name=".assessment.list.AssessmentListActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -50,7 +50,7 @@ class ExamineeProfileRecyclerViewAdapter extends RecyclerView.Adapter<ExamineePr
 
         Examinee examinee = examineeList.get(position);
         holder.nameText.setText(examinee.getName());
-        holder.ageText.setText(String.valueOf(examinee.getAge()));
+        holder.ageText.setText(String.valueOf(examinee.getAgeAsString()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

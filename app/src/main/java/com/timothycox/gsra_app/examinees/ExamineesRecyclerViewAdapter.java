@@ -19,7 +19,7 @@ class ExamineesRecyclerViewAdapter extends RecyclerView.Adapter<ExamineesRecycle
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView nameText, ageText, ageLabel;
-        ImageView boyFace, girlFace;
+        ImageView boyFace, girlFace, neutralFace;
 
         public ViewHolder(View view) {
             super(view);
@@ -28,6 +28,7 @@ class ExamineesRecyclerViewAdapter extends RecyclerView.Adapter<ExamineesRecycle
             ageLabel = view.findViewById(R.id.examineeRowBoyAgeLabel);
             boyFace = view.findViewById(R.id.examineeRowBoyface);
             girlFace = view.findViewById(R.id.examineeRowGirlface);
+            neutralFace = view.findViewById(R.id.examineeRowNeutralFace);
         }
     }
 
@@ -55,15 +56,17 @@ class ExamineesRecyclerViewAdapter extends RecyclerView.Adapter<ExamineesRecycle
 
 
         Examinee examinee = examineeList.get(position);
-        String examineAge = String.valueOf(examinee.getAge());
 
         holder.nameText.setText(examinee.getName());
-        holder.ageText.setText(examineAge + " months");
+        holder.ageText.setText(examinee.getAgeAsString());
 
         if (examinee.getGender().equals("Male")) {
             holder.girlFace.setVisibility(View.GONE);
+            holder.neutralFace.setVisibility(View.GONE);
         } else if (examinee.getGender().equals("Female")) {
             holder.boyFace.setVisibility(View.GONE);
+            holder.neutralFace.setVisibility(View.GONE);
+
         } else {
             holder.boyFace.setVisibility(View.GONE);
             holder.girlFace.setVisibility(View.GONE);
