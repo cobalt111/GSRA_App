@@ -9,6 +9,8 @@ interface LoginContract {
         void startLogin();
         void navigateToMain(@Nullable Bundle bundle);
         void showLoginFailedToast();
+        void showLoginScreenLoadingDialog();
+        void showAfterLoginSuccessLoadingDialog();
     }
     interface Presenter {
         void create();

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.timothycox.gsra_app.post.ExamineeCreatorActivity;
+import com.timothycox.gsra_app.creator.ExamineeCreatorActivity;
 
 class ExamineesNavigator implements ExamineesActivity.ExamineesScreenEvents {
 

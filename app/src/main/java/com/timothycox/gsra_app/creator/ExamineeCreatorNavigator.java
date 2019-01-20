@@ -1,4 +1,4 @@
-package com.timothycox.gsra_app.post;
+package com.timothycox.gsra_app.creator;
 
 import android.content.Context;
 import android.content.Intent;

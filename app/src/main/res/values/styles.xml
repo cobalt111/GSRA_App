@@ -54,10 +54,20 @@
         <item name="sv_detailTextAppearance">@style/CustomText2</item>
     </style>
 
-    <style name="CustomShowcaseTheme4" parent="ShowcaseView.Light">
-        <item name="sv_backgroundColor">#7E1249D9</item>
+    <style name="CustomShowcaseThemeDone" parent="ShowcaseView.Light">
+        <item name="sv_backgroundColor">#C11249D9</item>
         <item name="sv_showcaseColor">#7225467A</item>
-        <item name="sv_buttonText">Hide</item>
+        <item name="sv_buttonText">Done</item>
+        <item name="sv_tintButtonColor">false</item>
+        <item name="sv_titleTextAppearance">@style/CustomTitle2</item>
+        <item name="sv_detailTextAppearance">@style/CustomText2</item>
+
+    </style>
+
+    <style name="CustomShowcaseThemeNext" parent="ShowcaseView.Light">
+        <item name="sv_backgroundColor">#C11249D9</item>
+        <item name="sv_showcaseColor">#7225467A</item>
+        <item name="sv_buttonText">Next</item>
         <item name="sv_tintButtonColor">false</item>
         <item name="sv_titleTextAppearance">@style/CustomTitle2</item>
         <item name="sv_detailTextAppearance">@style/CustomText2</item>

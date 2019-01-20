@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -42,22 +43,11 @@ public class MainActivity extends AppCompatActivity
         presenter = new MainPresenter(this, getIntent().getBundleExtra("userBundle"));
         navigator = new MainNavigator(this);
 
-
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
-        new ShowcaseView.Builder(this)
-                .setTarget(new ViewTarget(R.id.main_test_button,this))
-                .setContentTitle("ShowcaseView")
-                .setContentText("This is highlighting the Home button")
-                .setStyle(R.style.CustomShowcaseTheme4)
-                .hideOnTouchOutside()
-                .withHoloShowcase()
-                .singleShot(1)
-                .build();
 
         navigationView.setNavigationItemSelectedListener(this);
         presenter.create();
@@ -66,22 +56,58 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
+        presenter.start();
     }
 
-//    @Override
-//    public void startLogin() {
-//        startActivityForResult(navigator.createAuthInstance(), MainNavigator.SIGN_IN);
-//    }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == MainNavigator.SIGN_IN) {
-//            presenter.onSignInAttempt(data);
-//            if (resultCode == RESULT_OK) presenter.onSignInSuccess();
-//            else presenter.onSignInFailed();
-//        }
-//    }
+    @Override
+    public void showTutorial(final boolean retry) {
+        ShowcaseView introSV = new ShowcaseView.Builder(this)
+                .setContentTitle("Hello!")
+                .setContentText("This application is intended for people who want to take assessments for those who may have Autism Spectrum Disorders. This is the home screen.")
+                .setStyle(R.style.CustomShowcaseThemeNext)
+                .withHoloShowcase()
+                .build();
+        ShowcaseView.Builder testSvBuilder = new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(R.id.main_test_button,this))
+                .setContentTitle("Take a new test")
+                .setContentText("This button will take you to the examinee select screen. You can choose an examinee to take an assessment for and/or create a new examinee.")
+                .setStyle(R.style.CustomShowcaseThemeNext)
+                .withHoloShowcase();
+        ShowcaseView.Builder assessmentSvBuilder = new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(R.id.main_previous_assessments_button,this))
+                .setContentTitle("Previous assessments")
+                .setContentText("This button will show you previous assessments that you have taken.")
+                .setStyle(R.style.CustomShowcaseThemeNext)
+                .withHoloShowcase();
+        ShowcaseView.Builder retryTutorialSvBuilder = new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(R.id.main_sv_menu_anchor_textview, this))
+                .setContentTitle("Start tutorials again")
+                .setContentText("These three dots will show an options menu if selected. You may choose to view the tutorial for the current screen again at any time by selecting, \"Start Tutorial.\"")
+                .setStyle(R.style.CustomShowcaseThemeDone)
+                .withHoloShowcase();
+        if (!introSV.isShowing()) introSV.show();
+        introSV.overrideButtonClick((View view) -> {
+            introSV.hide();
+            introSV.hideButton();
+            ShowcaseView testSV = testSvBuilder.build();
+            testSV.show();
+            testSV.overrideButtonClick((View anotherView) -> {
+                testSV.hide();
+                testSV.hideButton();
+                ShowcaseView assessmentSV = assessmentSvBuilder.build();
+                assessmentSV.show();
+                assessmentSV.overrideButtonClick((View thirdView) -> {
+                    assessmentSV.hide();
+                    assessmentSV.hideButton();
+                    ShowcaseView retrySV = retryTutorialSvBuilder.build();
+                    retrySV.setShowcaseX(1);
+                    retrySV.show();
+                    retrySV.overrideButtonClick((View fourthView) -> {retrySV.hide(); retrySV.hideButton();});
+                });
+            });
+        });
+        if (!retry) presenter.onTutorialSeen();
+    }
 
     @Override
     public void onBackPressed() {
@@ -105,12 +131,10 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_retry_tutorial) {
+            presenter.retryTutorial();
         }
-
         return super.onOptionsItemSelected(item);
     }
 

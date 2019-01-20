@@ -1,11 +1,13 @@
-package com.timothycox.gsra_app.examinees;
+package com.timothycox.gsra_app.creator;
 
-interface ExamineesContract {
+import android.os.Bundle;
+
+interface ExamineeCreatorContract {
     interface View {
-        void showTutorial(final boolean retry);
         void onClickAddExaminee();
-        void navigateToExamineeCreator();
-        void setRecyclerViewAdapter(ExamineesRecyclerViewAdapter adapter);
+        Bundle saveEnteredExamineeData();
+        void showTutorial(final boolean retry);
+        void navigateToAssessments(Bundle bundle);
     }
 
     interface Presenter {

@@ -1,27 +1,77 @@
 package com.timothycox.gsra_app.main;
 
 import android.os.Bundle;
+import android.util.Log;
 
-import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.timothycox.gsra_app.model.User;
+import com.timothycox.gsra_app.util.Firebase;
 
 class MainPresenter implements MainContract.Presenter {
 
-    // todo remove tag
-    private final static String TAG = "MainPresenter";
+    //todo remove tag
+    private String TAG = "MainPresenter";
 
     private MainContract.View view;
     private User user;
-    private IdpResponse response;
+    private Boolean tutorialSeen = false;
+    private Firebase firebase;
 
     MainPresenter(MainContract.View view, Bundle userBundle) {
         this.view = view;
         user = (User) userBundle.getSerializable("user");
+        firebase = Firebase.getInstance();
     }
 
     @Override
     public void create() {
-//        view.startLogin();
+        getTutorialState();
+    }
+
+    @Override
+    public void start() {
+    }
+
+    @Override
+    public void getTutorialState() {
+        DatabaseReference databaseReference = firebase.getDatabaseReference()
+                .child("server")
+                .child("users")
+                .child(user.getUid())
+                .child("tutorials")
+                .child("seenMain");
+        firebase.access(false, databaseReference, new Firebase.OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                tutorialSeen = dataSnapshot.getValue(Boolean.class);
+                if (!tutorialSeen) view.showTutorial(false);
+            }
+
+            @Override
+            public void onFailure(DatabaseError databaseError) {
+                //todo handle failure
+                Log.d(TAG, databaseError.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void onTutorialSeen() {
+        tutorialSeen = true;
+        DatabaseReference databaseReference = firebase.getDatabaseReference()
+                .child("server")
+                .child("users")
+                .child(user.getUid())
+                .child("tutorials")
+                .child("seenMain");
+        databaseReference.setValue(tutorialSeen);
+    }
+
+    @Override
+    public void retryTutorial() {
+        view.showTutorial(true);
     }
 
     @Override
@@ -37,21 +87,4 @@ class MainPresenter implements MainContract.Presenter {
         bundle.putSerializable("user", user);
         view.navigateToAssessments(bundle);
     }
-
-//    // todo fix this so presenter doesn't know about intent or idpresponse
-//    @Override
-//    public void onSignInAttempt(Intent intent) {
-//        response = IdpResponse.fromResultIntent(intent);
-//    }
-//
-//    @Override
-//    public void onSignInSuccess() {
-//        user = Authentication.getUser();
-//    }
-//
-//    @Override
-//    public void onSignInFailed() {
-//        // todo handle failure using idpresponse properly
-//        Log.d(TAG, String.valueOf(response.getError().getErrorCode()));
-//    }
 }

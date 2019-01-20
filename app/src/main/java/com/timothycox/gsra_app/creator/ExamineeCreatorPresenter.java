@@ -1,44 +1,44 @@
-package com.timothycox.gsra_app.profile;
+package com.timothycox.gsra_app.creator;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.timothycox.gsra_app.model.Examinee;
+import com.timothycox.gsra_app.model.User;
 import com.timothycox.gsra_app.util.Firebase;
 
-class ExamineeProfilePresenter implements ExamineeProfileContract.Presenter {
+class ExamineeCreatorPresenter implements ExamineeCreatorContract.Presenter {
 
     //todo remove tag
-    private String TAG = "ExamineeProfilePresenter";
+    private String TAG = "ExamineeCreatorPresenter";
 
-    private ExamineeProfileContract.View view;
-    private Examinee examinee;
-    private boolean tutorialSeen;
+    private ExamineeCreatorContract.View view;
+    private User user;
     private Firebase firebase;
+    private boolean tutorialSeen;
 
-    ExamineeProfilePresenter(ExamineeProfileContract.View view, Examinee examinee) {
+
+    public ExamineeCreatorPresenter(ExamineeCreatorContract.View view, User user) {
         this.view = view;
-        this.examinee = examinee;
+        this.user = user;
         firebase = Firebase.getInstance();
     }
 
     @Override
     public void create() {
         getTutorialState();
-        view.populateUIWithData(examinee);
     }
 
-    // todo test tutorial, retrieval of creatoruid from db
     @Override
     public void getTutorialState() {
         DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
                 .child("users")
-                .child(examinee.getCreatorUid())
+                .child(user.getUid())
                 .child("tutorials")
-                .child("seenProfile");
+                .child("seenCreator");
         firebase.access(false, databaseReference, new Firebase.OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -60,14 +60,32 @@ class ExamineeProfilePresenter implements ExamineeProfileContract.Presenter {
         DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
                 .child("users")
-                .child(examinee.getCreatorUid())
+                .child(user.getUid())
                 .child("tutorials")
-                .child("seenProfile");
+                .child("seenCreator");
         databaseReference.setValue(tutorialSeen);
     }
 
     @Override
     public void retryTutorial() {
         view.showTutorial(true);
+    }
+
+    @Override
+    public void onAddExaminee() {
+        Bundle bundle = view.saveEnteredExamineeData();
+
+        DatabaseReference databaseReference = firebase.getDatabaseReference()
+                .child("server")
+                .child("users")
+                .child(user.getUid())
+                .child("examinees")
+                .child(bundle.get("name").toString());
+
+        databaseReference.child("age").setValue(bundle.get("age"));
+        databaseReference.child("name").setValue(bundle.get("name").toString());
+        databaseReference.child("gender").setValue(bundle.get("gender").toString());
+
+        view.navigateToAssessments(bundle);
     }
 }

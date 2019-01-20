@@ -9,6 +9,7 @@ public class Examinee implements Serializable {
     private int age;
     private List<Assessment> assessments;
     private String gender;
+    private String creatorUid;
 
     public Examinee(String name, int age, String gender/*, List<Assessment> assessments */) {
         this.name = name;
@@ -81,5 +82,13 @@ public class Examinee implements Serializable {
 
     public void setAssessments(List<Assessment> assessments) {
         this.assessments = assessments;
+    }
+
+    public String getCreatorUid() {
+        return creatorUid;
+    }
+
+    public void setCreatorUid(String creatorUid) {
+        this.creatorUid = creatorUid;
     }
 }

@@ -21,9 +21,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         presenter = new LoginPresenter(this);
         navigator = new LoginNavigator(this);
 
-        ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "",
-                "Loading. Please wait...", true);
-
         presenter.create();
     }
 
@@ -41,16 +38,25 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 presenter.onSignInSuccess();
                 presenter.onMain();
             }
-            else
-                presenter.onSignInFailed();
+            else presenter.onSignInFailed();
         }
     }
 
     @Override
+    public void showLoginScreenLoadingDialog() {
+        ProgressDialog.show(LoginActivity.this, "",
+                "Loading login screen. Please wait...", true);
+    }
+
+    @Override
+    public void showAfterLoginSuccessLoadingDialog() {
+        ProgressDialog.show(LoginActivity.this, "",
+                "Login successful! Loading app...", true);
+    }
+
+    @Override
     public void showLoginFailedToast() {
-        Toast loginFailedToast = new Toast(this);
-        loginFailedToast.makeText(this, "Login attempt failed, please try again", Toast.LENGTH_SHORT);
-        loginFailedToast.show();
+        Toast.makeText(this, "Login attempt failed, please try again", Toast.LENGTH_SHORT).show();
     }
 
     interface LoginScreenEvents {

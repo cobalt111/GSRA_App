@@ -1,5 +1,7 @@
 package com.timothycox.gsra_app.examinees;
 
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,9 +14,13 @@ import java.util.List;
 
 class ExamineesPresenter implements ExamineesContract.Presenter {
 
+    // todo remove tag
+    private String TAG = "ExamineesPresenter";
+
     private ExamineesContract.View view;
     private User user;
     private Firebase firebase;
+    private boolean tutorialSeen;
 
     ExamineesPresenter(ExamineesContract.View view, User user) {
         this.view = view;
@@ -29,6 +35,7 @@ class ExamineesPresenter implements ExamineesContract.Presenter {
 
     @Override
     public void create() {
+        getTutorialState();
         DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
                 .child("users")
@@ -39,11 +46,11 @@ class ExamineesPresenter implements ExamineesContract.Presenter {
             public void onSuccess(DataSnapshot dataSnapshot) {
                 List<Examinee> examineeList = new ArrayList<>();
                 Examinee examinee;
-
                 for (DataSnapshot currentExaminee : dataSnapshot.getChildren()) {
                     examinee = new Examinee(currentExaminee.child("name").getValue(String.class),
                             currentExaminee.child("age").getValue(Integer.class),
                             currentExaminee.child("gender").getValue(String.class));
+                    examinee.setCreatorUid(user.getUid());
                     examineeList.add(examinee);
                 }
                 view.setRecyclerViewAdapter(new ExamineesRecyclerViewAdapter(examineeList));
@@ -51,8 +58,49 @@ class ExamineesPresenter implements ExamineesContract.Presenter {
 
             @Override
             public void onFailure(DatabaseError databaseError) {
-
+                //todo handle failure
+                Log.d(TAG, databaseError.getMessage());
             }
         });
+    }
+
+    @Override
+    public void getTutorialState() {
+        DatabaseReference databaseReference = firebase.getDatabaseReference()
+                .child("server")
+                .child("users")
+                .child(user.getUid())
+                .child("tutorials")
+                .child("seenExaminees");
+        firebase.access(false, databaseReference, new Firebase.OnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                tutorialSeen = dataSnapshot.getValue(Boolean.class);
+                if (!tutorialSeen) view.showTutorial(false);
+            }
+
+            @Override
+            public void onFailure(DatabaseError databaseError) {
+                //todo handle failure
+                Log.d(TAG, databaseError.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void onTutorialSeen() {
+        tutorialSeen = true;
+        DatabaseReference databaseReference = firebase.getDatabaseReference()
+                .child("server")
+                .child("users")
+                .child(user.getUid())
+                .child("tutorials")
+                .child("seenExaminees");
+        databaseReference.setValue(tutorialSeen);
+    }
+
+    @Override
+    public void retryTutorial() {
+        view.showTutorial(true);
     }
 }

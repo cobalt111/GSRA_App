@@ -7,9 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.timothycox.gsra_app.R;
 import com.timothycox.gsra_app.model.User;
 import com.timothycox.gsra_app.profile.ExamineeProfileActivity;
@@ -65,10 +69,69 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
         }));
     }
 
+    //todo change strings
+    @Override
+    public void showTutorial(boolean retry) {
+        ShowcaseView introSV = new ShowcaseView.Builder(this)
+                .setContentTitle("Examinee list")
+                .setContentText("This application is intended for people who want to take assessments for those who may have Autism Spectrum Disorders. This is the home screen.")
+                .setStyle(R.style.CustomShowcaseThemeNext)
+                .withHoloShowcase()
+                .build();
+        ShowcaseView.Builder listItemSvBuilder = new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(R.id.examineesRecyclerView,this))
+                .setContentTitle("Take a new test")
+                .setContentText("This button will take you to the examinee select screen. You can choose an examinee to take an assessment for and/or create a new examinee.")
+                .setStyle(R.style.CustomShowcaseThemeNext)
+                .withHoloShowcase();
+        ShowcaseView.Builder addExamineeSvBuilder = new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(R.id.examinees_add_button,this))
+                .setContentTitle("Previous assessments")
+                .setContentText("This button will show you previous assessments that you have taken.")
+                .setStyle(R.style.CustomShowcaseThemeDone)
+                .withHoloShowcase();
+        if (!introSV.isShowing()) introSV.show();
+        introSV.overrideButtonClick((View view) -> {
+            introSV.hide();
+            introSV.hideButton();
+            ShowcaseView listSV = listItemSvBuilder.build();
+            listSV.show();
+            listSV.overrideButtonClick((View anotherView) -> {
+                listSV.hide();
+                listSV.hideButton();
+                ShowcaseView addExamineeSV = addExamineeSvBuilder.build();
+                addExamineeSV.show();
+                addExamineeSV.overrideButtonClick((View thirdView) -> {addExamineeSV.hide(); addExamineeSV.hideButton();
+                });
+            });
+        });
+        if (!retry) presenter.onTutorialSeen();
+    }
+
     @Override
     public void setRecyclerViewAdapter(ExamineesRecyclerViewAdapter adapter) {
         this.adapter = adapter;
         examineesRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_retry_tutorial) {
+            presenter.retryTutorial();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

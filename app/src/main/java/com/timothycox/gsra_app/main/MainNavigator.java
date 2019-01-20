@@ -20,15 +20,6 @@ class MainNavigator implements MainActivity.MainScreenEvents {
         this.context = context;
     }
 
-//    Intent createAuthInstance() {
-//        return AuthUI.getInstance()
-//                .createSignInIntentBuilder()
-//                .setLogo(R.drawable.logo)
-//                .setAvailableProviders(Authentication.getAuthProviders())
-//                .build();
-//    }
-
-
     @Override
     public void itemClicked(final int id, @Nullable Bundle bundle) {
         switch (id) {

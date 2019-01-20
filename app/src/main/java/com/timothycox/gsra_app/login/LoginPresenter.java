@@ -11,6 +11,7 @@ import com.timothycox.gsra_app.util.Authentication;
 
 class LoginPresenter implements LoginContract.Presenter {
 
+    //todo remove tag
     private final static String TAG = "MainPresenter";
 
     private User user;
@@ -23,6 +24,7 @@ class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void create() {
+        view.showLoginScreenLoadingDialog();
         view.startLogin();
     }
 
@@ -41,6 +43,7 @@ class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void onSignInSuccess() {
+        view.showAfterLoginSuccessLoadingDialog();
         user = Authentication.getUser();
     }
 
