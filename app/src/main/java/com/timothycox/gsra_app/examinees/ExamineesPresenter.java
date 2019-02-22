@@ -49,7 +49,8 @@ class ExamineesPresenter implements ExamineesContract.Presenter {
                 for (DataSnapshot currentExaminee : dataSnapshot.getChildren()) {
                     examinee = new Examinee(currentExaminee.child("name").getValue(String.class),
                             currentExaminee.child("age").getValue(Integer.class),
-                            currentExaminee.child("gender").getValue(String.class));
+                            currentExaminee.child("gender").getValue(String.class),
+                            currentExaminee.child("creatorUid").getValue(String.class));
                     examinee.setCreatorUid(user.getUid());
                     examineeList.add(examinee);
                 }

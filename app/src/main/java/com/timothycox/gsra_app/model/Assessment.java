@@ -1,18 +1,24 @@
 package com.timothycox.gsra_app.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Assessment {
+public class Assessment implements Serializable {
     private List<Question> questions;
     private String category;
     private String examinee;
     private String timestamp;
+    private boolean completed;
+    private int result;
 
-    public Assessment(List<Question> questions, String category, String examinee, String timestamp) {
-        this.questions = questions;
-        this.category = category;
-        this.examinee = examinee;
-        this.timestamp = timestamp;
+    // todo convert to builder pattern
+    public Assessment(/*List<Question> questions, String category, String examinee, String timestamp, boolean completed, int result*/) {
+//        this.questions = questions;
+//        this.category = category;
+//        this.examinee = examinee;
+//        this.timestamp = timestamp;
+//        this.completed = completed;
+//        this.result = result;
     }
 
     public List<Question> getQuestions() {
@@ -45,5 +51,21 @@ public class Assessment {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
     }
 }

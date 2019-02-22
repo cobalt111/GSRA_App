@@ -50,32 +50,32 @@ public class ExamineeCreatorActivity extends AppCompatActivity implements Examin
     public void showTutorial(final boolean retry) {
         ShowcaseView introSV = new ShowcaseView.Builder(this)
                 .setContentTitle("Examinee Creator")
-                .setContentText("This application is intended for people who want to take assessments for those who may have Autism Spectrum Disorders. This is the home screen.")
+                .setContentText("This is the examinee creator screen. Here you will create the profile for the examinee to be assessed.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase()
                 .build();
         ShowcaseView.Builder nameSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examinee_creator_name_textfield,this))
-                .setContentTitle("Take a new test")
-                .setContentText("This button will take you to the examinee select screen. You can choose an examinee to take an assessment for and/or create a new examinee.")
+                .setContentTitle("Name")
+                .setContentText("Enter the examinee's name.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase();
         ShowcaseView.Builder ageSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examinee_creator_age_textfield,this))
-                .setContentTitle("Previous assessments")
-                .setContentText("This button will show you previous assessments that you have taken.")
+                .setContentTitle("Age")
+                .setContentText("Enter the examinee's age in months.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase();
         ShowcaseView.Builder genderSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examineeCreatorGenderSpinner, this))
-                .setContentTitle("Start tutorials again")
-                .setContentText("These three dots will show an options menu if selected. You may choose to view the tutorial for the current screen again at any time by selecting, \"Start Tutorial.\"")
+                .setContentTitle("Gender")
+                .setContentText("If desired, enter the examinee's gender or select \"Prefer not to say.\"")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase();
         ShowcaseView.Builder submitSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examinee_creator_add_button, this))
-                .setContentTitle("Start tutorials again")
-                .setContentText("These three dots will show an options menu if selected. You may choose to view the tutorial for the current screen again at any time by selecting, \"Start Tutorial.\"")
+                .setContentTitle("Submit")
+                .setContentText("Click this button to submit your new examinee.")
                 .setStyle(R.style.CustomShowcaseThemeDone)
                 .withHoloShowcase();
         if (!introSV.isShowing()) introSV.show();

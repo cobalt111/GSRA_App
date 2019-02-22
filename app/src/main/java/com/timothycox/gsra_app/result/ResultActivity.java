@@ -1,6 +1,7 @@
 package com.timothycox.gsra_app.result;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +13,17 @@ import android.widget.TextView;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.timothycox.gsra_app.R;
+import com.timothycox.gsra_app.model.Assessment;
 import com.timothycox.gsra_app.model.Examinee;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ResultActivity extends AppCompatActivity implements ResultContract.View {
 
     private ResultPresenter presenter;
+    private ResultNavigator navigator;
 
     @BindView(R.id.resultBoyFace) ImageView boyFace;
     @BindView(R.id.resultGirlFace) ImageView girlFace;
@@ -40,28 +44,32 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
-        presenter = new ResultPresenter(this, (Examinee) getIntent().getSerializableExtra("selectedExaminee"));
+        presenter = new ResultPresenter(this,
+                (Examinee) getIntent().getSerializableExtra("selectedExaminee"),
+                (Assessment) getIntent().getSerializableExtra("assessment"));
+        navigator = new ResultNavigator(this);
+        presenter.create();
     }
 
     //todo finish this tutorial
     @Override
     public void showTutorial(boolean retry) {
         ShowcaseView introSV = new ShowcaseView.Builder(this)
-                .setContentTitle("Assessment Results")
-                .setContentText("This application is intended for people who want to take assessments for those who may have Autism Spectrum Disorders. This is the home screen.")
+                .setContentTitle("Assessment results")
+                .setContentText("This screen shows the results of the assessment for the examinee.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase()
                 .build();
         ShowcaseView.Builder infoSvBuilder = new ShowcaseView.Builder(this)
-                .setTarget(new ViewTarget(R.id.main_test_button,this))
-                .setContentTitle("Take a new test")
-                .setContentText("This button will take you to the examinee select screen. You can choose an examinee to take an assessment for and/or create a new examinee.")
+                .setTarget(new ViewTarget(R.id.resultScoreText,this))
+                .setContentTitle("Final score")
+                .setContentText("This is the score the examinee has been given for the assessment.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase();
         ShowcaseView.Builder assessmentsTakenSvBuilder = new ShowcaseView.Builder(this)
-                .setTarget(new ViewTarget(R.id.main_previous_assessments_button,this))
-                .setContentTitle("Previous assessments")
-                .setContentText("This button will show you previous assessments that you have taken.")
+                .setTarget(new ViewTarget(R.id.resultExplanationText,this))
+                .setContentTitle("Score explanation")
+                .setContentText("This will provide more information about the next steps to take based on the score given to your examinee.")
                 .setStyle(R.style.CustomShowcaseThemeDone)
                 .withHoloShowcase();
         if (!introSV.isShowing()) introSV.show();
@@ -80,6 +88,31 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
             });
         });
         if (!retry) presenter.onTutorialSeen();
+    }
+
+    @Override
+    public void populatedUIWithData(Examinee examinee, Assessment assessment) {
+        nameText.setText(examinee.getName());
+        ageText.setText(examinee.getAgeAsHumanReadable());
+        dateText.setText(assessment.getTimestamp());
+        scoreText.setText(String.valueOf(assessment.getResult()));
+        switch (examinee.getGender()) {
+            case "Male": {
+                girlFace.setVisibility(View.GONE);
+                neutralFace.setVisibility(View.GONE);
+                break;
+            }
+            case "Female": {
+                boyFace.setVisibility(View.GONE);
+                neutralFace.setVisibility(View.GONE);
+                break;
+            }
+            default: {
+                girlFace.setVisibility(View.GONE);
+                boyFace.setVisibility(View.GONE);
+                break;
+            }
+        }
     }
 
     @Override
@@ -103,6 +136,29 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
     }
 
     interface ResultScreenEvents {
-        void itemClicked(final int id);
+        void itemClicked(final int id, @Nullable Bundle bundle);
+    }
+
+    @Override
+    @OnClick(R.id.resultTakeNewTestButton)
+    public void onClickNewTest() {
+        presenter.onNewTest();
+    }
+
+    @Override
+    public void navigateToNewTest(Bundle bundle) {
+        navigator.itemClicked(ResultNavigator.ASSESSMENT_ACTIVITY, bundle);
+        finish();
+    }
+
+    @Override
+    @OnClick(R.id.resultLearnMoreButton)
+    public void onClickLearnMore() {
+        presenter.onLearnMore();
+    }
+
+    @Override
+    public void navigateToLearnMore(Bundle bundle) {
+        navigator.itemClicked(ResultNavigator.INFORMATION_ACTIVITY, bundle);
     }
 }

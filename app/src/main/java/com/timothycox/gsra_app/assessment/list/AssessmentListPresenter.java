@@ -33,6 +33,7 @@ class AssessmentListPresenter implements AssessmentListContract.Presenter {
                 .child(user.getUid())
                 .child("examinees");
 
+        //todo fix this
         firebase.access(true, databaseReference, new Firebase.OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -88,8 +89,10 @@ class AssessmentListPresenter implements AssessmentListContract.Presenter {
 
                             questionList.add(question);
                         }
-
-                        assessmentList.add(new Assessment(questionList, assessmentLevel, examinee, timestamp));
+                        //todo fix this
+                        boolean completed = true;
+                        int result = 100;
+//                        assessmentList.add(new Assessment(questionList, assessmentLevel, examinee, timestamp, completed, result));
                     }
                 }
                 view.setRecyclerViewAdapter(new AssessmentRecyclerViewAdapter(assessmentList));

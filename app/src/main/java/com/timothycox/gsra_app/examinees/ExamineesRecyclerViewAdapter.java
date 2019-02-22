@@ -58,7 +58,7 @@ class ExamineesRecyclerViewAdapter extends RecyclerView.Adapter<ExamineesRecycle
         Examinee examinee = examineeList.get(position);
 
         holder.nameText.setText(examinee.getName());
-        holder.ageText.setText(examinee.getAgeAsString());
+        holder.ageText.setText(examinee.getAgeAsHumanReadable());
 
         if (examinee.getGender().equals("Male")) {
             holder.girlFace.setVisibility(View.GONE);

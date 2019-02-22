@@ -37,92 +37,85 @@ public class AssessmentListActivity extends AppCompatActivity implements Assessm
         presenter = new AssessmentListPresenter(this,
                 (User) getIntent().getBundleExtra("userBundle").get("user"));
         navigator = new AssessmentListNavigator(this);
-//        presenter.create();
 
-        List<Question> questions = new ArrayList<>();
-        List<Assessment> assessments = new ArrayList<>();
-        Question sampleQuestion = new Question();
-        sampleQuestion.setQuestionText("This is sample answer");
-        sampleQuestion.setImportance("high");
-        sampleQuestion.setId(4);
-        questions.add(sampleQuestion);
-        Assessment sampleAssessment = new Assessment(questions, "12-month", "Isaac", "11-2-18");
-        assessments.add(sampleAssessment);
-
-        sampleQuestion.setQuestionText("This is sample answer");
-        sampleQuestion.setImportance("high");
-        sampleQuestion.setId(4);
-        questions.add(sampleQuestion);
-        sampleAssessment = new Assessment(questions, "12-month", "Beth", "12-8-17");
-        assessments.add(sampleAssessment);
-
-        sampleQuestion.setQuestionText("This is sample answer");
-        sampleQuestion.setImportance("high");
-        sampleQuestion.setId(4);
-        questions.add(sampleQuestion);
-        sampleAssessment = new Assessment(questions, "12-month", "Oscar", "1-8-16");
-        assessments.add(sampleAssessment);
-
-        sampleQuestion.setQuestionText("This is sample answer");
-        sampleQuestion.setImportance("high");
-        sampleQuestion.setId(4);
-        questions.add(sampleQuestion);
-        sampleAssessment = new Assessment(questions, "12-month", "Penny", "3-8-18");
-        assessments.add(sampleAssessment);
-
-        sampleQuestion.setQuestionText("This is sample answer");
-        sampleQuestion.setImportance("high");
-        sampleQuestion.setId(4);
-        questions.add(sampleQuestion);
-        sampleAssessment = new Assessment(questions, "12-month", "Wilbur", "11-8-18");
-        assessments.add(sampleAssessment);
-
-        sampleQuestion.setQuestionText("This is sample answer");
-        sampleQuestion.setImportance("high");
-        sampleQuestion.setId(4);
-        questions.add(sampleQuestion);
-        sampleAssessment = new Assessment(questions, "12-month", "Rachel", "11-8-18");
-        assessments.add(sampleAssessment);
-
-        sampleQuestion.setQuestionText("This is sample answer");
-        sampleQuestion.setImportance("high");
-        sampleQuestion.setId(4);
-        questions.add(sampleQuestion);
-        sampleAssessment = new Assessment(questions, "12-month", "Harry", "11-8-18");
-        assessments.add(sampleAssessment);
-
-        sampleQuestion.setQuestionText("This is sample answer");
-        sampleQuestion.setImportance("high");
-        sampleQuestion.setId(4);
-        questions.add(sampleQuestion);
-        sampleAssessment = new Assessment(questions, "12-month", "Joe", "11-8-18");
-        assessments.add(sampleAssessment);
-
-        adapter = new AssessmentRecyclerViewAdapter(assessments);
-        assessmentRecyclerView.setAdapter(adapter);
-
-        assessmentRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        assessmentRecyclerView.setLayoutManager(layoutManager);
-        assessmentRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        assessmentRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),
-                assessmentRecyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-                Intent openAssessmentIntent = new Intent(getApplicationContext(), AssessmentActivity.class);
-//                openProfileIntent.putExtra("animalID", adapter.animalList
-//                        .get(position)
-//                        .getKey());
-
-                startActivity(openAssessmentIntent);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
+//        List<Question> questions = new ArrayList<>();
+//        List<Assessment> assessments = new ArrayList<>();
+//        Question sampleQuestion = new Question();
+//        sampleQuestion.setQuestionText("This is sample answer");
+//        sampleQuestion.setImportance("high");
+//        sampleQuestion.setId(4);
+//        questions.add(sampleQuestion);
+//        Assessment sampleAssessment = new Assessment(questions, "12-month", "Isaac", "11-2-18", true, 100);
+//        assessments.add(sampleAssessment);
+//
+//        sampleQuestion.setQuestionText("This is sample answer");
+//        sampleQuestion.setImportance("high");
+//        sampleQuestion.setId(4);
+//        questions.add(sampleQuestion);
+//        sampleAssessment = new Assessment(questions, "12-month", "Beth", "12-8-17", true, 100);
+//        assessments.add(sampleAssessment);
+//
+//        sampleQuestion.setQuestionText("This is sample answer");
+//        sampleQuestion.setImportance("high");
+//        sampleQuestion.setId(4);
+//        questions.add(sampleQuestion);
+//        sampleAssessment = new Assessment(questions, "12-month", "Oscar", "1-8-16", true, 100);
+//        assessments.add(sampleAssessment);
+//
+//        sampleQuestion.setQuestionText("This is sample answer");
+//        sampleQuestion.setImportance("high");
+//        sampleQuestion.setId(4);
+//        questions.add(sampleQuestion);
+//        sampleAssessment = new Assessment(questions, "12-month", "Penny", "3-8-18", true, 100);
+//        assessments.add(sampleAssessment);
+//
+//        sampleQuestion.setQuestionText("This is sample answer");
+//        sampleQuestion.setImportance("high");
+//        sampleQuestion.setId(4);
+//        questions.add(sampleQuestion);
+//        sampleAssessment = new Assessment(questions, "12-month", "Wilbur", "11-8-18", true, 100);
+//        assessments.add(sampleAssessment);
+//
+//        sampleQuestion.setQuestionText("This is sample answer");
+//        sampleQuestion.setImportance("high");
+//        sampleQuestion.setId(4);
+//        questions.add(sampleQuestion);
+//        sampleAssessment = new Assessment(questions, "12-month", "Rachel", "11-8-18", true, 100);
+//        assessments.add(sampleAssessment);
+//
+//        sampleQuestion.setQuestionText("This is sample answer");
+//        sampleQuestion.setImportance("high");
+//        sampleQuestion.setId(4);
+//        questions.add(sampleQuestion);
+//        sampleAssessment = new Assessment(questions, "12-month", "Harry", "11-8-18", true, 100);
+//        assessments.add(sampleAssessment);
+//
+//        sampleQuestion.setQuestionText("This is sample answer");
+//        sampleQuestion.setImportance("high");
+//        sampleQuestion.setId(4);
+//        questions.add(sampleQuestion);
+//        sampleAssessment = new Assessment(questions, "12-month", "Joe", "11-8-18", true, 100);
+//        assessments.add(sampleAssessment);
+//
+//        adapter = new AssessmentRecyclerViewAdapter(assessments);
+//        assessmentRecyclerView.setAdapter(adapter);
+//        assessmentRecyclerView.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+//        assessmentRecyclerView.setLayoutManager(layoutManager);
+//        assessmentRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//        assessmentRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),
+//                assessmentRecyclerView, new RecyclerTouchListener.ClickListener() {
+//            @Override
+//            public void onClick(View view, int position) {
+//                Intent openAssessmentIntent = new Intent(getApplicationContext(), AssessmentActivity.class);
+//                startActivity(openAssessmentIntent);
+//            }
+//
+//            @Override
+//            public void onLongClick(View view, int position) {
+//
+//            }
+//        }));
     }
 
     @Override

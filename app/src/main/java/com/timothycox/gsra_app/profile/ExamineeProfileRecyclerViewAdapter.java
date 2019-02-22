@@ -7,28 +7,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.timothycox.gsra_app.R;
+import com.timothycox.gsra_app.model.Assessment;
 import com.timothycox.gsra_app.model.Examinee;
 
 import java.util.List;
 
 class ExamineeProfileRecyclerViewAdapter extends RecyclerView.Adapter<ExamineeProfileRecyclerViewAdapter.ViewHolder> {
 
-    public List<Examinee> examineeList;
+    public List<Assessment> assessmentList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameText, ageText;
+        TextView assessmentTimestampText, completionStatusText;
 
         public ViewHolder(View view) {
             super(view);
-            nameText = view.findViewById(R.id.listingsNameTextView);
-            ageText = view.findViewById(R.id.listingsSubTextView);
+            assessmentTimestampText = view.findViewById(R.id.listingsNameTextView);
+            completionStatusText = view.findViewById(R.id.listingsSubTextView);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ExamineeProfileRecyclerViewAdapter(List<Examinee> dataset) {
-        examineeList = dataset;
+    public ExamineeProfileRecyclerViewAdapter(List<Assessment> dataset) {
+        assessmentList = dataset;
     }
 
 
@@ -47,15 +48,18 @@ class ExamineeProfileRecyclerViewAdapter extends RecyclerView.Adapter<ExamineePr
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
+        Assessment assessment = assessmentList.get(position);
+        holder.assessmentTimestampText.setText(assessment.getTimestamp());
+        if (assessment.isCompleted()) {
+            holder.completionStatusText.setText("Completed");
+        }
+        else holder.completionStatusText.setText("Incomplete");
 
-        Examinee examinee = examineeList.get(position);
-        holder.nameText.setText(examinee.getName());
-        holder.ageText.setText(String.valueOf(examinee.getAgeAsString()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return examineeList.size();
+        return assessmentList.size();
     }
 }

@@ -6,6 +6,7 @@ interface ExamineeProfileContract {
     interface View {
         void showTutorial(final boolean retry);
         void populateUIWithData(Examinee examinee);
+        void setRecyclerViewAdapter(ExamineeProfileRecyclerViewAdapter adapter);
     }
 
     interface Presenter {

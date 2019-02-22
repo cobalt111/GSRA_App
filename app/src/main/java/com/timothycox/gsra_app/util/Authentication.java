@@ -20,8 +20,8 @@ public class Authentication {
     public static List<AuthUI.IdpConfig> getAuthProviders() {
         return Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.FacebookBuilder().build(),
-                new AuthUI.IdpConfig.GoogleBuilder().build()
+                new AuthUI.IdpConfig.FacebookBuilder().build()
+//                new AuthUI.IdpConfig.GoogleBuilder().build()
         );
     }
 
@@ -30,11 +30,4 @@ public class Authentication {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         return new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getUid());
     }
-
-//    public void setAuthToPersist() {
-//        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-//        firebaseAuth.
-//    }
-
-
 }

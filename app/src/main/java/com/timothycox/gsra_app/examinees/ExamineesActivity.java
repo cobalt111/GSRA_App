@@ -73,21 +73,21 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
     @Override
     public void showTutorial(boolean retry) {
         ShowcaseView introSV = new ShowcaseView.Builder(this)
-                .setContentTitle("Examinee list")
-                .setContentText("This application is intended for people who want to take assessments for those who may have Autism Spectrum Disorders. This is the home screen.")
+                .setContentTitle("Examinees")
+                .setContentText("This screens shows the list of examinees registered to your account.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase()
                 .build();
         ShowcaseView.Builder listItemSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examineesRecyclerView,this))
-                .setContentTitle("Take a new test")
-                .setContentText("This button will take you to the examinee select screen. You can choose an examinee to take an assessment for and/or create a new examinee.")
+                .setContentTitle("Examinee list")
+                .setContentText("Each examinee will appear in a list here.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase();
         ShowcaseView.Builder addExamineeSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examinees_add_button,this))
-                .setContentTitle("Previous assessments")
-                .setContentText("This button will show you previous assessments that you have taken.")
+                .setContentTitle("Add new examinee")
+                .setContentText("To add a new examinee, click this button.")
                 .setStyle(R.style.CustomShowcaseThemeDone)
                 .withHoloShowcase();
         if (!introSV.isShowing()) introSV.show();

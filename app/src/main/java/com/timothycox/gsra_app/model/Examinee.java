@@ -11,14 +11,14 @@ public class Examinee implements Serializable {
     private String gender;
     private String creatorUid;
 
-    public Examinee(String name, int age, String gender/*, List<Assessment> assessments */) {
+    public Examinee(String name, int age, String gender, String creatorUid) {
         this.name = name;
         this.age = age;
         this.gender = gender;
-//        this.assessments = assessments;
+        this.creatorUid = creatorUid;
     }
 
-    public String getAgeAsString() {
+    public String getAgeAsHumanReadable() {
         int years = age / 12;
         int months = age % 12;
         String monthTerm = "", yearsTerm = "";
