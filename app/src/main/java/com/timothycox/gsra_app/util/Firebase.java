@@ -54,42 +54,6 @@ public class Firebase {
         locationOfQuery.keepSynced(true);
     }
 
-//    public void access(final boolean continuousUpdating, final Query locationOfQuery,
-//                       final Firebase.OnGetDataListener listener) {
-//        locationOfQuery.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                if (!continuousUpdating) locationOfQuery.removeEventListener(this);
-//                listener.onSuccess(dataSnapshot);
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//                if (!continuousUpdating) locationOfQuery.removeEventListener(this);
-//                listener.onSuccessfulChange(dataSnapshot);
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                if (!continuousUpdating) locationOfQuery.removeEventListener(this);
-//                listener.onSuccessfulRemoval(dataSnapshot);
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//                if (!continuousUpdating) locationOfQuery.removeEventListener(this);
-//                listener.onSuccessfulMove(dataSnapshot);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                if (!continuousUpdating) locationOfQuery.removeEventListener(this);
-//                listener.onFailure(databaseError);
-//            }
-//        });
-//        locationOfQuery.keepSynced(true);
-//    }
-
     public interface OnGetDataListener {
         void onSuccess(DataSnapshot dataSnapshot);
 

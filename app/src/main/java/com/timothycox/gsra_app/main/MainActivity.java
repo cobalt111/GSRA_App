@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void showTutorial(final boolean retry) {
+    public void showTutorial(final boolean isRetrySession) {
         ShowcaseView introSV = new ShowcaseView.Builder(this)
                 .setContentTitle("Hello!")
                 .setContentText("This application is intended for people who want to take assessments for those who may have Autism Spectrum Disorders. This is the home screen.")
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity
                 });
             });
         });
-        if (!retry) presenter.onTutorialSeen();
+        if (!isRetrySession) presenter.onTutorialSeen();
     }
 
     @Override
@@ -132,9 +132,8 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_retry_tutorial) {
+        if (id == R.id.action_retry_tutorial)
             presenter.retryTutorial();
-        }
         return super.onOptionsItemSelected(item);
     }
 

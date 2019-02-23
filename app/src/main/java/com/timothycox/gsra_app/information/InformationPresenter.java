@@ -16,7 +16,6 @@ class InformationPresenter implements InformationContract.Presenter {
     private InformationContract.View view;
     private Examinee examinee;
     private Firebase firebase;
-    private boolean tutorialSeen;
 
     public InformationPresenter(InformationContract.View view, Examinee examinee) {
         this.view = view;
@@ -40,8 +39,7 @@ class InformationPresenter implements InformationContract.Presenter {
         firebase.access(false, databaseReference, new Firebase.OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                tutorialSeen = dataSnapshot.getValue(Boolean.class);
-                if (!tutorialSeen) view.showTutorial(false);
+                if (!dataSnapshot.getValue(Boolean.class)) view.showTutorial(false);
             }
 
             @Override
@@ -54,11 +52,11 @@ class InformationPresenter implements InformationContract.Presenter {
 
     @Override
     public void onTutorialSeen() {
-
+        //todo finish creating tutorial
     }
 
     @Override
     public void retryTutorial() {
-
+        // todo finish creating tutorial
     }
 }

@@ -20,7 +20,6 @@ class ExamineesPresenter implements ExamineesContract.Presenter {
     private ExamineesContract.View view;
     private User user;
     private Firebase firebase;
-    private boolean tutorialSeen;
 
     ExamineesPresenter(ExamineesContract.View view, User user) {
         this.view = view;
@@ -76,8 +75,7 @@ class ExamineesPresenter implements ExamineesContract.Presenter {
         firebase.access(false, databaseReference, new Firebase.OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                tutorialSeen = dataSnapshot.getValue(Boolean.class);
-                if (!tutorialSeen) view.showTutorial(false);
+                if (!dataSnapshot.getValue(Boolean.class)) view.showTutorial(false);
             }
 
             @Override
@@ -90,14 +88,13 @@ class ExamineesPresenter implements ExamineesContract.Presenter {
 
     @Override
     public void onTutorialSeen() {
-        tutorialSeen = true;
         DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
                 .child("users")
                 .child(user.getUid())
                 .child("tutorials")
                 .child("seenExaminees");
-        databaseReference.setValue(tutorialSeen);
+        databaseReference.setValue(true);
     }
 
     @Override

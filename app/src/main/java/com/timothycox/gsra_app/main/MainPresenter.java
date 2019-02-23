@@ -13,10 +13,8 @@ class MainPresenter implements MainContract.Presenter {
 
     //todo remove tag
     private String TAG = "MainPresenter";
-
     private MainContract.View view;
     private User user;
-    private Boolean tutorialSeen = false;
     private Firebase firebase;
 
     MainPresenter(MainContract.View view, Bundle userBundle) {
@@ -45,8 +43,11 @@ class MainPresenter implements MainContract.Presenter {
         firebase.access(false, databaseReference, new Firebase.OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                tutorialSeen = dataSnapshot.getValue(Boolean.class);
-                if (!tutorialSeen) view.showTutorial(false);
+                try {
+                    if (!dataSnapshot.getValue(Boolean.class)) view.showTutorial(false);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -59,14 +60,13 @@ class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onTutorialSeen() {
-        tutorialSeen = true;
         DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
                 .child("users")
                 .child(user.getUid())
                 .child("tutorials")
                 .child("seenMain");
-        databaseReference.setValue(tutorialSeen);
+        databaseReference.setValue(true);
     }
 
     @Override

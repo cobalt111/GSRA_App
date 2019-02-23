@@ -19,7 +19,6 @@ class ResultPresenter implements ResultContract.Presenter {
     private Examinee examinee;
     private Assessment assessment;
     private Firebase firebase;
-    private boolean tutorialSeen;
 
     ResultPresenter(ResultContract.View view, Examinee examinee, Assessment assessment) {
         this.view = view;
@@ -45,8 +44,7 @@ class ResultPresenter implements ResultContract.Presenter {
         firebase.access(false, databaseReference, new Firebase.OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                tutorialSeen = dataSnapshot.getValue(Boolean.class);
-                if (!tutorialSeen) view.showTutorial(false);
+                if (!dataSnapshot.getValue(Boolean.class)) view.showTutorial(false);
             }
 
             @Override
@@ -59,14 +57,13 @@ class ResultPresenter implements ResultContract.Presenter {
 
     @Override
     public void onTutorialSeen() {
-        tutorialSeen = true;
         DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
                 .child("users")
                 .child(examinee.getCreatorUid())
                 .child("tutorials")
                 .child("seenResult");
-        databaseReference.setValue(tutorialSeen);
+        databaseReference.setValue(true);
     }
 
     @Override
