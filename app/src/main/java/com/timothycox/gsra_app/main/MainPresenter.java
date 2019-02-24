@@ -34,6 +34,7 @@ class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void getTutorialState() {
+        onTutorialSeen();
         DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
                 .child("users")
@@ -43,11 +44,8 @@ class MainPresenter implements MainContract.Presenter {
         firebase.access(false, databaseReference, new Firebase.OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                try {
-                    if (!dataSnapshot.getValue(Boolean.class)) view.showTutorial(false);
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                }
+                boolean tutorialSeen = dataSnapshot.getValue(Boolean.class);
+                if (!tutorialSeen) view.showTutorial(false);
             }
 
             @Override

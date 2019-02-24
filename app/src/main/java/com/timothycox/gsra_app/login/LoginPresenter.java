@@ -8,7 +8,6 @@ import com.firebase.ui.auth.IdpResponse;
 import com.timothycox.gsra_app.model.User;
 import com.timothycox.gsra_app.util.Authentication;
 
-
 class LoginPresenter implements LoginContract.Presenter {
 
     //todo remove tag
@@ -25,14 +24,30 @@ class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void create() {
         view.showLoginScreenLoadingDialog();
+    }
+
+    @Override
+    public void onNetworkAvailable() {
+        view.dismissNetworkDisconnectedDialog();
         view.startLogin();
     }
 
     @Override
-    public void onMain() {
+    public void onNetworkUnavailable() {
+        view.showNetworkDisconnectedDialog();
+    }
+
+    @Override
+    public void openMain() {
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", user);
         view.navigateToMain(bundle);
+    }
+
+    @Override
+    public boolean checkWifiConnStatus() {
+
+        return false;
     }
 
     // todo fix this so presenter doesn't know about intent or idpresponse
@@ -43,8 +58,11 @@ class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void onSignInSuccess() {
+        view.dismissLoginScreenLoadingDialog();
         view.showAfterLoginSuccessLoadingDialog();
         user = Authentication.getUser();
+        view.dismissAfterLoginSuccessfulLoadingDialog();
+        openMain();
     }
 
     @Override

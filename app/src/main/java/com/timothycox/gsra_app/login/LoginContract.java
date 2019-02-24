@@ -8,13 +8,20 @@ interface LoginContract {
     interface View {
         void startLogin();
         void navigateToMain(@Nullable Bundle bundle);
+        void showNetworkDisconnectedDialog();
+        void dismissNetworkDisconnectedDialog();
         void showLoginFailedToast();
         void showLoginScreenLoadingDialog();
+        void dismissLoginScreenLoadingDialog();
         void showAfterLoginSuccessLoadingDialog();
+        void dismissAfterLoginSuccessfulLoadingDialog();
     }
     interface Presenter {
         void create();
-        void onMain();
+        boolean checkWifiConnStatus();
+        void openMain();
+        void onNetworkAvailable();
+        void onNetworkUnavailable();
         void onSignInAttempt(Intent intent);
         void onSignInSuccess();
         void onSignInFailed();
