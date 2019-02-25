@@ -8,8 +8,8 @@ interface LoginContract {
     interface View {
         void startLogin();
         void navigateToMain(@Nullable Bundle bundle);
-        void showNetworkDisconnectedDialog();
-        void dismissNetworkDisconnectedDialog();
+//        void showNetworkDisconnectedDialog();
+//        void dismissNetworkDisconnectedDialog();
         void showLoginFailedToast();
         void showLoginScreenLoadingDialog();
         void dismissLoginScreenLoadingDialog();
@@ -18,7 +18,7 @@ interface LoginContract {
     }
     interface Presenter {
         void create();
-        boolean checkWifiConnStatus();
+        void createNewUser();
         void openMain();
         void onNetworkAvailable();
         void onNetworkUnavailable();

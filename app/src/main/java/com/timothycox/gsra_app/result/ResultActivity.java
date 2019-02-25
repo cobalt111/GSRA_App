@@ -59,19 +59,22 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
                 .setContentText("This screen shows the results of the assessment for the examinee.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase()
+                .hideOnTouchOutside()
                 .build();
         ShowcaseView.Builder infoSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.resultScoreText,this))
                 .setContentTitle("Final score")
                 .setContentText("This is the score the examinee has been given for the assessment.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder assessmentsTakenSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.resultExplanationText,this))
                 .setContentTitle("Score explanation")
                 .setContentText("This will provide more information about the next steps to take based on the score given to your examinee.")
                 .setStyle(R.style.CustomShowcaseThemeDone)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         if (!introSV.isShowing()) introSV.show();
         introSV.overrideButtonClick((View view) -> {
             introSV.hide();

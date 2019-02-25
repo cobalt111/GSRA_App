@@ -28,26 +28,19 @@ class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void onNetworkAvailable() {
-        view.dismissNetworkDisconnectedDialog();
+//        view.dismissNetworkDisconnectedDialog();
         view.startLogin();
     }
 
     @Override
     public void onNetworkUnavailable() {
-        view.showNetworkDisconnectedDialog();
+//        view.showNetworkDisconnectedDialog();
     }
 
-    @Override
-    public void openMain() {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("user", user);
-        view.navigateToMain(bundle);
-    }
 
     @Override
-    public boolean checkWifiConnStatus() {
+    public void createNewUser() {
 
-        return false;
     }
 
     // todo fix this so presenter doesn't know about intent or idpresponse
@@ -61,8 +54,8 @@ class LoginPresenter implements LoginContract.Presenter {
         view.dismissLoginScreenLoadingDialog();
         view.showAfterLoginSuccessLoadingDialog();
         user = Authentication.getUser();
-        view.dismissAfterLoginSuccessfulLoadingDialog();
         openMain();
+        view.dismissAfterLoginSuccessfulLoadingDialog();
     }
 
     @Override
@@ -71,5 +64,12 @@ class LoginPresenter implements LoginContract.Presenter {
         Log.d(TAG, String.valueOf(response.getError().getErrorCode()));
         view.showLoginFailedToast();
         view.startLogin();
+    }
+
+    @Override
+    public void openMain() {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", user);
+        view.navigateToMain(bundle);
     }
 }

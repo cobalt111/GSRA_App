@@ -17,13 +17,15 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.firebase.FirebaseApp;
 import com.timothycox.gsra_app.R;
+import com.timothycox.gsra_app.util.NetworkStateReceiver;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainContract.View {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        NetworkStateReceiver.NetworkStateReceiverListener, MainContract.View {
 
     private MainPresenter presenter;
     private MainNavigator navigator;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         presenter = new MainPresenter(this, getIntent().getBundleExtra("userBundle"));
         navigator = new MainNavigator(this);
 
+
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,10 +56,22 @@ public class MainActivity extends AppCompatActivity
         presenter.create();
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
         presenter.start();
+    }
+
+    @Override
+    public void networkAvailable() {
+
+    }
+
+    @Override
+    public void networkUnavailable() {
+
     }
 
     @Override
@@ -66,26 +81,31 @@ public class MainActivity extends AppCompatActivity
                 .setContentText("This application is intended for people who want to take assessments for those who may have Autism Spectrum Disorders. This is the home screen.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase()
+                .hideOnTouchOutside()
                 .build();
         ShowcaseView.Builder testSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.main_test_button,this))
                 .setContentTitle("Take a new test")
                 .setContentText("This button will take you to the examinee select screen. You can choose an examinee to take an assessment for and/or create a new examinee.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder assessmentSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.main_previous_assessments_button,this))
                 .setContentTitle("Previous assessments")
                 .setContentText("This button will show you previous assessments that you have taken.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder retryTutorialSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.main_sv_menu_anchor_textview, this))
                 .setContentTitle("Start tutorials again")
                 .setContentText("These three dots will show an options menu if selected. You may choose to view the tutorial for the current screen again at any time by selecting, \"Start Tutorial.\"")
                 .setStyle(R.style.CustomShowcaseThemeDone)
-                .withHoloShowcase();
-        if (!introSV.isShowing()) introSV.show();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
+        if (!introSV.isShowing())
+            introSV.show();
         introSV.overrideButtonClick((View view) -> {
             introSV.hide();
             introSV.hideButton();

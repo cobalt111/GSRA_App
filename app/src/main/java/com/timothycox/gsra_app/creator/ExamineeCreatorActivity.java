@@ -53,31 +53,36 @@ public class ExamineeCreatorActivity extends AppCompatActivity implements Examin
                 .setContentText("This is the examinee creator screen. Here you will create the profile for the examinee to be assessed.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase()
+                .hideOnTouchOutside()
                 .build();
         ShowcaseView.Builder nameSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examinee_creator_name_textfield,this))
                 .setContentTitle("Name")
                 .setContentText("Enter the examinee's name.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder ageSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examinee_creator_age_textfield,this))
                 .setContentTitle("Age")
                 .setContentText("Enter the examinee's age in months.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder genderSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examineeCreatorGenderSpinner, this))
                 .setContentTitle("Gender")
                 .setContentText("If desired, enter the examinee's gender or select \"Prefer not to say.\"")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder submitSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examinee_creator_add_button, this))
                 .setContentTitle("Submit")
                 .setContentText("Click this button to submit your new examinee.")
                 .setStyle(R.style.CustomShowcaseThemeDone)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         if (!introSV.isShowing()) introSV.show();
         introSV.overrideButtonClick((View view) -> {
             introSV.hide();

@@ -1,6 +1,5 @@
 package com.timothycox.gsra_app.login;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -19,7 +18,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private LoginPresenter presenter;
     private LoginNavigator navigator;
     private NetworkStateReceiver networkStateReceiver;
-    private AlertDialog networkDisconnectedDialog;
+//    private AlertDialog networkDisconnectedDialog;
     private ProgressDialog loginSuccessDialog;
     private ProgressDialog loginLoadingDialog;
 
@@ -29,15 +28,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         setContentView(R.layout.activity_login);
         presenter = new LoginPresenter(this);
         navigator = new LoginNavigator(this);
-        networkStateReceiver = new NetworkStateReceiver();
+        networkStateReceiver = new NetworkStateReceiver(this);
         networkStateReceiver.addListener(this);
         this.registerReceiver(networkStateReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        networkDisconnectedDialog = new AlertDialog.Builder(this)
-                .setTitle("Network Disconnected")
-                .setMessage("Your network has been disconnected. Please reconnect and try again")
-                .setNeutralButton(android.R.string.yes, null)
-                .setIcon(android.R.drawable.ic_dialog_alert).create();
         loginLoadingDialog = new ProgressDialog(this);
         loginLoadingDialog.setMessage("Loading login screen. Please wait...");
         loginSuccessDialog = new ProgressDialog(this);
@@ -80,10 +74,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         }
     }
 
-    @Override
-    public void showNetworkDisconnectedDialog() {
-        networkDisconnectedDialog.show();
-    }
+//    @Override
+//    public void showNetworkDisconnectedDialog() {
+//        networkDisconnectedDialog.show();
+//    }
 
     @Override
     public void showLoginScreenLoadingDialog() {
@@ -95,10 +89,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         loginSuccessDialog.show();
     }
 
-    @Override
-    public void dismissNetworkDisconnectedDialog() {
-        networkDisconnectedDialog.dismiss();
-    }
+//    @Override
+//    public void dismissNetworkDisconnectedDialog() {
+//        networkDisconnectedDialog.dismiss();
+//    }
 
     @Override
     public void dismissLoginScreenLoadingDialog() {

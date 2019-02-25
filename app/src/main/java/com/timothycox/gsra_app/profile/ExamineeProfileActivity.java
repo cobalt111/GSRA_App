@@ -15,13 +15,8 @@ import android.widget.TextView;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.timothycox.gsra_app.R;
-import com.timothycox.gsra_app.model.Assessment;
 import com.timothycox.gsra_app.model.Examinee;
-import com.timothycox.gsra_app.model.Question;
 import com.timothycox.gsra_app.result.ResultActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +59,6 @@ public class ExamineeProfileActivity extends AppCompatActivity implements Examin
 
         presenter.create();
 
-
         profileRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         profileRecyclerView.setLayoutManager(layoutManager);
@@ -87,6 +81,11 @@ public class ExamineeProfileActivity extends AppCompatActivity implements Examin
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public void setRecyclerViewAdapter(ExamineeProfileRecyclerViewAdapter adapter) {
         this.adapter = adapter;
         profileRecyclerView.setAdapter(adapter);
@@ -100,19 +99,22 @@ public class ExamineeProfileActivity extends AppCompatActivity implements Examin
                 .setContentText("This screen shows information about the examinee selected.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase()
+                .hideOnTouchOutside()
                 .build();
         ShowcaseView.Builder infoSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.profileAgeLabel,this))
                 .setContentTitle("Profile information")
                 .setContentText("This is the examinee's name and age.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder assessmentsTakenSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.profileRecyclerView,this))
                 .setContentTitle("Previous assessments")
                 .setContentText("If available, chose one of these to view previous assessment results for this examinee.")
                 .setStyle(R.style.CustomShowcaseThemeDone)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         if (!introSV.isShowing()) introSV.show();
         introSV.overrideButtonClick((View view) -> {
             introSV.hide();

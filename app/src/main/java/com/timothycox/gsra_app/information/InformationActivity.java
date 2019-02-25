@@ -65,25 +65,29 @@ public class InformationActivity extends AppCompatActivity implements Informatio
                 .setContentText("This application is intended for people who want to take assessments for those who may have Autism Spectrum Disorders. This is the home screen.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase()
+                .hideOnTouchOutside()
                 .build();
         ShowcaseView.Builder testSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.main_test_button,this))
                 .setContentTitle("Take a new test")
                 .setContentText("This button will take you to the examinee select screen. You can choose an examinee to take an assessment for and/or create a new examinee.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder assessmentSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.main_previous_assessments_button,this))
                 .setContentTitle("Previous assessments")
                 .setContentText("This button will show you previous assessments that you have taken.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder retryTutorialSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.main_sv_menu_anchor_textview, this))
                 .setContentTitle("Start tutorials again")
                 .setContentText("These three dots will show an options menu if selected. You may choose to view the tutorial for the current screen again at any time by selecting, \"Start Tutorial.\"")
                 .setStyle(R.style.CustomShowcaseThemeDone)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         if (!introSV.isShowing()) introSV.show();
         introSV.overrideButtonClick((View view) -> {
             introSV.hide();

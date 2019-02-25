@@ -34,7 +34,6 @@ class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void getTutorialState() {
-        onTutorialSeen();
         DatabaseReference databaseReference = firebase.getDatabaseReference()
                 .child("server")
                 .child("users")

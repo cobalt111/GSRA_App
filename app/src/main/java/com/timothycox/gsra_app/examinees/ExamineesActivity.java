@@ -77,19 +77,22 @@ public class ExamineesActivity extends AppCompatActivity implements ExamineesCon
                 .setContentText("This screens shows the list of examinees registered to your account.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
                 .withHoloShowcase()
+                .hideOnTouchOutside()
                 .build();
         ShowcaseView.Builder listItemSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examineesRecyclerView,this))
                 .setContentTitle("Examinee list")
                 .setContentText("Each examinee will appear in a list here.")
                 .setStyle(R.style.CustomShowcaseThemeNext)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         ShowcaseView.Builder addExamineeSvBuilder = new ShowcaseView.Builder(this)
                 .setTarget(new ViewTarget(R.id.examinees_add_button,this))
                 .setContentTitle("Add new examinee")
                 .setContentText("To add a new examinee, click this button.")
                 .setStyle(R.style.CustomShowcaseThemeDone)
-                .withHoloShowcase();
+                .withHoloShowcase()
+                .hideOnTouchOutside();
         if (!introSV.isShowing()) introSV.show();
         introSV.overrideButtonClick((View view) -> {
             introSV.hide();
