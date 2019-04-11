@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.timothycox.gsra_app.model.Assessment;
 import com.timothycox.gsra_app.model.Examinee;
 
+
 interface ResultContract {
     interface View {
         void showTutorial(final boolean retry);

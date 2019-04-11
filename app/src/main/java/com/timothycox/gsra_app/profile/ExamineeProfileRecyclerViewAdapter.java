@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.timothycox.gsra_app.R;
 import com.timothycox.gsra_app.model.Assessment;
-import com.timothycox.gsra_app.model.Examinee;
 
 import java.util.List;
 
